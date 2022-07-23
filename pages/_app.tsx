@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider>
       <Aside/>
       <Component {...pageProps} />
+      <div id='portal'/>
     </ThemeProvider>
   )
 }

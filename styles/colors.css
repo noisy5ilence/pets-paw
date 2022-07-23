@@ -1,7 +1,7 @@
 :root {
   --color-1: #FFFFFF;
   --color-2: #FF868E;
-  --color-3: #8C8C8C;
+  --color-placeholder: #8C8C8C;
   --color-4: #FBE0DC;
   --color-5: #F8F8F7;
   --color-7: #97EAB9;
@@ -14,22 +14,25 @@
   --color-14: rgba(255, 134, 142, 0.3);
   --color-15: rgba(255, 210, 128, 0.3);
   --color-16: rgba(255, 255, 255, 0.5);
+  --color-popup-overlay: rgba(29, 29, 29, 0.6);
 }
 
 body[data-theme='light'] {
-  --color-svg-background: #FFFFFF;
+  --color-element-background: #FFFFFF;
   --color-figure-color: #FBE0DC;
   --color-background: #F8F8F7;
   --color-primary: #1D1D1D;
   --color-default-button: #FFFFFF;
-  transition: all ease-in 200ms;
+  --color-popup-background: #F8F8F7;
+  transition: all ease-in var(--animation-duration);
 }
 
 body[data-theme='dark'] {
-  --color-svg-background: rgba(255, 255, 255, 0.05);;
+  --color-element-background: rgba(255, 255, 255, 0.05);
   --color-figure-color: rgba(255, 255, 255, 0.1);
   --color-background: #1D1D1D;
   --color-primary: #FFFFFF;
   --color-default-button: rgba(255, 255, 255, 0.1);
-  transition: all ease-in 200ms;
+  --color-popup-background: #282828;
+  transition: all ease-in var(--animation-duration);
 }

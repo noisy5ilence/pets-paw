@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+}
+
+.sideMenu {
+  order: 0;
+  display: none;
+  margin-right: 10px;
+}
+
+.search {
+  max-width: 428px;
+  width: 100%;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 1050px) {
+  .sideMenu {
+    display: block;
+  }
+  .navigation {
+    margin-left: auto;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .header {
+    flex-wrap: wrap;
+  }
+  .search {
+    order: 3;
+    max-width: 100%;
+    margin-top: 10px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .navigation {
+    order: 2;
+  }
+}

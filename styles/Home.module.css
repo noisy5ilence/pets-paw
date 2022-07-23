@@ -24,7 +24,7 @@
   background-position-y: center;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1050px) {
   .main {
     display: none;
   }

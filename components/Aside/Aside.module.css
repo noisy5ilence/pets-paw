@@ -1,7 +1,6 @@
 .aside {
   padding-left: 147px;
   padding-top: var(--outside-gap);
-  max-width: 730px;
   width: 100%;
 }
 
@@ -22,7 +21,7 @@
   font-size: 20px;
   line-height: 29px;
   margin-top: 10px;
-  color: var(--color-3);
+  color: var(--color-placeholder);
 }
 
 .aside h6 {
@@ -42,11 +41,17 @@
 
 @media screen and (max-width: 1300px) {
   .aside {
-    padding-right: 147px;
+    padding-left: 30px;
     max-width: 100%;
   }
+}
+
+@media screen and (max-width: 1050px) {
   .container {
     margin: 0 auto;
+  }
+  .aside.isHide {
+    display: none;
   }
 }
 

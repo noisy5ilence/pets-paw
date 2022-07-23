@@ -10,7 +10,15 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  transition: background-color ease-in 200ms;
+  transition: background-color ease-in var(--animation-duration);
+}
+
+.button.vector {
+  background: var(--color-element-background);
+  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
 }
 
 .button:hover,

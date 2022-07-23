@@ -1,0 +1,16 @@
+.main {
+  padding: 30px;
+  max-width: var(--main-width);
+  width: 100%;
+  flex-grow: 1;
+}
+
+.header {
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1050px) {
+  .main {
+    max-width: 100%;
+  }
+}

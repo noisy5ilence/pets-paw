@@ -10,6 +10,6 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: var(--color-svg-background);
+  background: var(--color-element-background);
   margin-right: 5px;
 }

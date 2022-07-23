@@ -1,3 +1,5 @@
 :root {
   --outside-gap: 30px;
+  --main-width: 680px;
+  --animation-duration: 150ms;
 }

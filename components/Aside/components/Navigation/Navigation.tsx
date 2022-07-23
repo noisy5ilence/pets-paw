@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { routes } from '../../../../constants/routes';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import { Card } from './components';
 
 import classes from './Navigation.module.css';
 
-const routes = [
+const items: [keyof typeof routes, string][] = [
   ['voting', 'var(--color-8)'],
   ['breeds', 'var(--color-7)'],
   ['gallery', 'var(--color-9)']
@@ -18,15 +19,17 @@ export const Navigation: FC = () => {
   return (
     <nav>
       <ul className={classes.list}>
-        { routes.map(([key, color]) => {
-          const isActive = router.asPath.includes(key);
+        { items.map(([key, color]) => {
+          const route = routes[key];
+          const isActive = router.asPath.includes(route.path);
+
           return (
             <li key={key} className={classes.item}>
               <div className={classes.card}>
                 <Card color={color} src={`/components/Aside/Navigation/${key}.png`} name={key} isActive={isActive}/>
               </div>
               <button className={cn('button', { active: isActive })}>
-                <Link href={`/${key}`}>{key.toUpperCase()}</Link>
+                <Link href={route.path}>{route.title}</Link>
               </button>
             </li>
           )

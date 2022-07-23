@@ -1,11 +1,14 @@
+import cn from 'classnames';
+import { useRouter } from 'next/router';
 import { Logo, Navigation, ThemeToggle } from './components';
 import { FC } from 'react';
 
 import classes from './Aside.module.css';
 
 export const Aside: FC = () => {
+  const router = useRouter();
   return (
-    <aside className={classes.aside}>
+    <aside className={cn(classes.aside, {[classes.isHide]: router.asPath !== '/'})}>
       <div className={classes.container}>
         <header className={classes.header}>
           <Logo/>
