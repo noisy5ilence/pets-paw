@@ -1,0 +1,65 @@
+.list {
+  list-style: none;
+  display: flex;
+}
+
+.item {
+  position: relative;
+  width: 138px;
+}
+
+.item:not(:last-child) {
+  margin-right: 16px;
+}
+
+.item button {
+  width: 100%;
+  letter-spacing: 2px;
+}
+
+.item button a::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.card + button {
+  margin-top: 10px;
+}
+
+.item:hover .card div {
+  border-color: var(--color-1);
+  transition: all ease-in 200ms;
+}
+
+.item:active .card div {
+  border-color: var(--color-4);
+  transition: all ease-in 200ms;
+}
+
+@media screen and (max-width: 490px) {
+  .card {
+    display: none;
+  }
+
+  .card + button {
+    margin-top: 0;
+  }
+
+  .list {
+    flex-direction: column;
+  }
+
+  .item {
+    margin-right: 0;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .item:first-child {
+    margin-top: 0;
+  }
+}

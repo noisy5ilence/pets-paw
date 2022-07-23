@@ -1,0 +1,35 @@
+:root {
+  --color-1: #FFFFFF;
+  --color-2: #FF868E;
+  --color-3: #8C8C8C;
+  --color-4: #FBE0DC;
+  --color-5: #F8F8F7;
+  --color-7: #97EAB9;
+  --color-8: #B4B7FF;
+  --color-9: #FFD280;
+  --color-10: #7B61FF;
+  --color-11: #000000;
+  --color-12: rgba(151, 234, 185, 0.3);
+  --color-13: rgba(255, 134, 142, 0.6);
+  --color-14: rgba(255, 134, 142, 0.3);
+  --color-15: rgba(255, 210, 128, 0.3);
+  --color-16: rgba(255, 255, 255, 0.5);
+}
+
+body[data-theme='light'] {
+  --color-svg-background: #FFFFFF;
+  --color-figure-color: #FBE0DC;
+  --color-background: #F8F8F7;
+  --color-primary: #1D1D1D;
+  --color-default-button: #FFFFFF;
+  transition: all ease-in 200ms;
+}
+
+body[data-theme='dark'] {
+  --color-svg-background: rgba(255, 255, 255, 0.05);;
+  --color-figure-color: rgba(255, 255, 255, 0.1);
+  --color-background: #1D1D1D;
+  --color-primary: #FFFFFF;
+  --color-default-button: rgba(255, 255, 255, 0.1);
+  transition: all ease-in 200ms;
+}

@@ -1,0 +1,33 @@
+.label {
+  position: relative;
+  background: var(--color-4);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  width: 44px;
+  cursor: pointer;
+}
+
+.input {
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.indicator {
+  display: block;
+  background: var(--color-2);
+  border-radius: 40px;
+  width: 16px;
+  height: 16px;
+  transition: margin-left ease-in 200ms;
+}
+
+.input:checked + .indicator {
+  margin-left: 20px;
+  transition: margin-left ease-out 200ms;
+}

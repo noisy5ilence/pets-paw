@@ -1,0 +1,15 @@
+.card {
+  position: relative;
+  width: 138px;
+  height: 198px;
+  border-radius: 20px;
+  border: 4px solid var(--color-16);
+}
+
+.active {
+  border-color: var(--color-4);
+}
+
+.card img {
+  object-fit: scale-down;
+}
