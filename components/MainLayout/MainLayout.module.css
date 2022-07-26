@@ -9,8 +9,24 @@
   margin-bottom: 10px;
 }
 
+.content {
+  background: var(--color-element-background);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.breadcrumbs {
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: 1050px) {
   .main {
     max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .main {
+    padding: 20px;
   }
 }

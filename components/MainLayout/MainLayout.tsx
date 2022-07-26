@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '@/components';
 import { FC, ReactElement } from 'react';
 import { Header } from '../Header';
 
@@ -14,6 +15,9 @@ export const MainLayout: FC<Props> = ({ children }) => {
         <Header/>
       </div>
       <div className={classes.content}>
+        <div className={classes.breadcrumbs}>
+          <Breadcrumbs/>
+        </div>
         {children}
       </div>
     </main>

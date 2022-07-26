@@ -11,6 +11,7 @@
   font-size: 12px;
   line-height: 16px;
   transition: background-color ease-in var(--animation-duration);
+  cursor: pointer;
 }
 
 .button.vector {
@@ -26,10 +27,17 @@
   background: var(--color-4);
 }
 
-.button:active,
-.button.active {
+button.button:active,
+button.button.active {
   background: var(--color-2);
   color: var(--color-1);
+}
+
+button.button:active svg,
+button.button:active path,
+button.button.active svg,
+button.button.active path {
+  fill: var(--color-1);
 }
 
 .button:focus,

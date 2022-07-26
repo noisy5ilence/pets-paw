@@ -1,0 +1,41 @@
+.photo {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.photo img {
+  object-fit: cover;
+}
+
+.voting {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.activities {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: -44px;
+  z-index: 1;
+}
+
+.logs {
+  margin-top: 14px;
+  width: 100%;
+  max-height: calc(100vh - 648px);
+  overflow: auto;
+}
+
+@media screen and (max-width: 550px) {
+  .photo {
+    height: 295px;
+  }
+  .logs {
+    max-height: calc(100vh - 614px);
+  }
+}

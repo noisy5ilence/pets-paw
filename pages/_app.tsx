@@ -1,15 +1,29 @@
-import '../styles/globals.css'
-import { Aside } from '../components';
-import { ThemeProvider } from '../contexts/ThemeProvider';
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
+import { useState } from 'react';
+
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+
+import { Aside } from '@/components';
+import { ThemeProvider } from '@/contexts/ThemeProvider';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        staleTime: Number.POSITIVE_INFINITY
+      }
+    }
+  }));
   return (
-    <ThemeProvider>
-      <Aside/>
-      <Component {...pageProps} />
-      <div id='portal'/>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <Aside/>
+        <Component {...pageProps} />
+        <div id='portal'/>
+      </ThemeProvider>
+    </QueryClientProvider>
   )
 }
 

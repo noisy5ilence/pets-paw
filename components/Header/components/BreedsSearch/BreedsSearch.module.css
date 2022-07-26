@@ -31,23 +31,25 @@
   outline-color: var(--color-2);
 }
 
-.submit {
+button.submit {
   position: absolute;
   cursor: pointer;
   right: 10px;
-  background: var(--color-figure-color);
+  background: var(--color-alt-icon-background);
 }
 
-.submit:hover {
+button.submit:hover {
   background: var(--color-2);
 }
 
-.submit svg,
-.submit path {
+button.submit svg,
+button.submit path {
   fill: var(--color-2);
 }
 
-.submit:hover svg,
-.submit:hover path {
+button.submit:hover svg,
+button.submit:hover path,
+button.submit:active svg,
+button.submit:active path {
   fill: var(--color-1);
 }

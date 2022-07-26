@@ -8,6 +8,7 @@
   display: flex;
   padding: var(--outside-gap);
   justify-content: flex-end;
+  z-index: 10;
 }
 
 .overlay.hideOverlay {
