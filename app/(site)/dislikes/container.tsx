@@ -1,12 +1,14 @@
-"use client";
+'use client';
 
-import { useMemo } from "react";
-import useVotes from "../voting/useVotes";
+import { useMemo } from 'react';
 
-import Grid from "@/components/Grid";
+import Grid from '@/components/Grid';
+import NoItem from '@/components/NoItem';
+
+import useVotes from '../voting/useVotes';
 
 export default function Container() {
-  const { data: votes } = useVotes();
+  const { data: votes, isLoading, isFetched } = useVotes();
 
   const photos = useMemo(() => {
     return (
@@ -16,5 +18,7 @@ export default function Container() {
     );
   }, [votes]);
 
-  return <Grid photos={photos} />;
+  if (isFetched && !photos.length) return <NoItem>dislikes</NoItem>;
+
+  return <Grid photos={photos} isLoading={isLoading}/>;
 }

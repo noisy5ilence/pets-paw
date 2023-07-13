@@ -1,18 +1,19 @@
-"use client";
+'use client';
 
-import { routes } from "@/constants/routes";
-import cn from "classnames";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { FC } from "react";
+import { FC } from 'react';
+import cn from 'classnames';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
-import styles from "./styles.module.css";
+import { routes } from '@/constants/routes';
+
+import styles from './styles.module.css';
 
 export const Breadcrumbs: FC = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const routeKeys = pathname.split("/").filter(Boolean) as Array<
+  const routeKeys = pathname.split('/').filter(Boolean) as Array<
     keyof typeof routes
   >;
 
@@ -20,7 +21,7 @@ export const Breadcrumbs: FC = () => {
     <ul className={styles.root}>
       <li className={styles.item}>
         <button
-          className={cn("button", "focused-via-keyboard", styles.back)}
+          className={cn('button', 'focused-via-keyboard', styles.back)}
           onClick={() => router.back()}
         >
           <svg
@@ -53,13 +54,13 @@ export const Breadcrumbs: FC = () => {
             <Link
               className={cn(
                 styles.breadcrumb,
-                "focused-via-keyboard",
+                'focused-via-keyboard',
                 styles.link,
                 {
                   [styles.active]: isActive,
                 }
               )}
-              href={route?.path || "/"}
+              href={route?.path || '/'}
             >
               {key || route?.title}
             </Link>

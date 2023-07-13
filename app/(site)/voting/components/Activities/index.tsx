@@ -1,20 +1,21 @@
-import cn from "classnames";
-import { FC } from "react";
+import { FC } from 'react';
+import cn from 'classnames';
 
-import styles from "./styles.module.css";
-import useVote from "../../useVote";
-import useFavorite from "../../useFavorite";
+import useFavorite from '../../useFavorite';
+import useVote from '../../useVote';
+
+import styles from './styles.module.css';
 
 interface Props {
-  cat?: RandomCat;
+  pet?: RandomPet;
   favoriteId?: number;
   disabled?: boolean;
   onChangeCat: () => void;
 }
 
-const Activities: FC<Props> = ({ cat, favoriteId, disabled, onChangeCat }) => {
-  const vote = useVote({ cat });
-  const { add, remove } = useFavorite({ cat });
+const Activities: FC<Props> = ({ pet, favoriteId, disabled, onChangeCat }) => {
+  const vote = useVote({ pet });
+  const { add, remove } = useFavorite({ pet });
 
   const isFav = Boolean(favoriteId);
 
@@ -47,7 +48,7 @@ const Activities: FC<Props> = ({ cat, favoriteId, disabled, onChangeCat }) => {
       </li>
       <li
         className={cn(styles.item, styles.fav)}
-        title={isFav ? "Remove from favorite" : "Add to favorite"}
+        title={isFav ? 'Remove from favorite' : 'Add to favorite'}
       >
         <button
           className="button"

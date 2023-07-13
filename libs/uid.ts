@@ -1,11 +1,11 @@
-import { v4 } from "uuid";
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
+import { v4 } from 'uuid';
 
 export default function uid() {
   const Cookies = cookies();
-  const catLoverId = Cookies.get("catLoverId")?.value;
+  const petLoverId = Cookies.get('petLoverId')?.value;
 
-  if (!catLoverId) {
+  if (!petLoverId) {
     const uid = v4();
 
     const days = 30;
@@ -13,13 +13,13 @@ export default function uid() {
     const minutes = 60;
     const seconds = 60;
 
-    Cookies.set("catLoverId", uid, {
+    Cookies.set('petLoverId', uid, {
       maxAge: days * hours * minutes * seconds,
-      path: "/",
+      path: '/',
     });
 
     return uid;
   }
 
-  return catLoverId;
+  return petLoverId;
 }

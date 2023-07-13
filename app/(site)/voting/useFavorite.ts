@@ -1,17 +1,18 @@
-import { useMutation } from "react-query";
-import API from "./api";
+import { useMutation } from 'react-query';
 
-import { KEY } from "./useFavorites";
-import useQueryStateUpdater from "@/hooks/useQueryStateUpdater";
+import useQueryStateUpdater from '@/hooks/useQueryStateUpdater';
 
-export default function useFavorite({ cat }: { cat?: RandomCat }) {
+import API from './api';
+import { KEY } from './useFavorites';
+
+export default function useFavorite({ pet }: { pet?: RandomPet }) {
   const setFavorites = useQueryStateUpdater<Favorite[]>({ key: KEY });
 
-  const add = useMutation(() => API.favorites.add({ catId: cat?.id! }), {
+  const add = useMutation(() => API.favorites.add({ petId: pet?.id! }), {
     onSuccess({ id }) {
       setFavorites((state) => {
         return [
-          { id, image_id: cat?.id, created_at: new Date() } as Favorite,
+          { id, image_id: pet?.id, image: { id: pet?.id, url: pet?.url }, created_at: new Date() } as Favorite,
           ...(state || []),
         ];
       });

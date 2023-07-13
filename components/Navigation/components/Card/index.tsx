@@ -1,9 +1,8 @@
-import { StaticImageData } from "next/image";
-import { FC } from "react";
+import { FC } from 'react';
+import cn from 'classnames';
+import { StaticImageData } from 'next/image';
 
-import cn from "classnames";
-
-import classes from "./styles.module.css";
+import classes from './styles.module.css';
 
 interface Props {
   color: string;

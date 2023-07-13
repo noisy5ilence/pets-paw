@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import cn from "classnames";
-import { StaticImageData } from "next/image";
-import { usePathname } from "next/navigation";
-import { FC } from "react";
-import Link from "next/link";
+import { FC } from 'react';
+import cn from 'classnames';
+import { StaticImageData } from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { routes } from "@/constants/routes";
+import { routes } from '@/constants/routes';
+import breeds from '@/public/breeds.png';
+import gallery from '@/public/gallery.png';
+import voting from '@/public/voting.png';
 
-import voting from "@/public/voting.png";
-import breeds from "@/public/breeds.png";
-import gallery from "@/public/gallery.png";
+import Card from './components/Card';
 
-import Card from "./components/Card";
-
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 const items: [keyof typeof routes, string, StaticImageData][] = [
-  ["voting", "var(--color-8)", voting],
-  ["breeds", "var(--color-7)", breeds],
-  ["gallery", "var(--color-9)", gallery],
+  ['voting', 'var(--color-8)', voting],
+  ['breeds', 'var(--color-7)', breeds],
+  ['gallery', 'var(--color-9)', gallery],
 ];
+
 
 const Navigation: FC = () => {
   const path = usePathname();
@@ -45,7 +45,7 @@ const Navigation: FC = () => {
                 </div>
                 <button
                   tabIndex={-1}
-                  className={cn("button", { active: isActive })}
+                  className={cn('button', { active: isActive })}
                 >
                   {route.title}
                 </button>

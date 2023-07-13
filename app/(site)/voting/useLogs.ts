@@ -1,17 +1,18 @@
-import { useQuery } from "react-query";
-import API from "./api";
-import { useMemo } from "react";
-import useFavorites from "./useFavorites";
-import useVotes from "./useVotes";
+import { useMemo } from 'react';
+import { useQuery } from 'react-query';
 
-export default function useLogs({ catId }: { catId?: string }) {
+import API from './api';
+import useFavorites from './useFavorites';
+import useVotes from './useVotes';
+
+export default function useLogs({ petId }: { petId?: string }) {
   const { data: favorites } = useFavorites();
   const { data: votes } = useVotes();
 
   return {
     favoriteId: useMemo(() => {
-      return favorites?.find(({ image_id }) => image_id === catId)?.id;
-    }, [favorites, catId]),
+      return favorites?.find(({ image_id }) => image_id === petId)?.id;
+    }, [favorites, petId]),
     logs: useMemo(() => {
       const logs: Log[] = [];
 

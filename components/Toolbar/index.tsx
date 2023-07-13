@@ -1,8 +1,8 @@
-import SideMenu from "./components/SideMenu";
-import Search from "./components/Search";
-import Navigation from "./components/Navigation";
+import Navigation from './components/Navigation';
+import Search from './components/Search';
+import SideMenu from './components/SideMenu';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 const Toolbar = () => {
   return (

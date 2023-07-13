@@ -1,18 +1,18 @@
-import client from "@/network";
+import client from '@/network';
 
 const API = {
-  randomCats(): Promise<RandomCat[]> {
-    return client.get("/randomCat");
+  randomCats(): Promise<RandomPet[]> {
+    return client.get('/randomCat');
   },
   favorites: {
     list(): Promise<Favorite[]> {
-      return client.get("/favorites");
+      return client.get('/favorites');
     },
-    add({ catId }: { catId: string }): Promise<SuccessResponse> {
-      return client.post("/favorites", { image_id: catId });
+    add({ petId }: { petId: string }): Promise<SuccessResponse> {
+      return client.post('/favorites', { image_id: petId });
     },
     delete({ favoriteId }: { favoriteId: string }) {
-      return client.delete("/favorites", {
+      return client.delete('/favorites', {
         params: {
           favoriteId,
         },
@@ -21,16 +21,16 @@ const API = {
   },
   votes: {
     vote({
-      catId,
+           petId,
       vote,
     }: {
-      catId: string;
+      petId: string;
       vote: number;
     }): Promise<SuccessResponse> {
-      return client.post("/votes", { image_id: catId, value: vote });
+      return client.post('/votes', { image_id: petId, value: vote });
     },
     list(): Promise<Vote[]> {
-      return client.get("/votes");
+      return client.get('/votes');
     },
   },
 };

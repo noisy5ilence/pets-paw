@@ -1,7 +1,10 @@
-import cn from "classnames";
-import { FC } from "react";
+import { FC } from 'react';
+import classes from 'classnames';
+import cn from 'classnames';
 
-import styles from "./styles.module.css";
+import NoItem from '@/components/NoItem';
+
+import styles from './styles.module.css';
 
 interface Props {
   logs: Array<Log>;
@@ -12,22 +15,23 @@ const Logs: FC<Props> = ({ logs, className }) => {
   return (
     <ul className={cn(styles.root, className)}>
       {!logs.length ? (
-        <li className={styles.item}>
-          <span className={styles.info}>No actions yet.</span>
+        <li >
+          <NoItem>actions</NoItem>
         </li>
       ) : (
         logs.map(({ created_at, id, image_id, value }) => {
           const createdAt = new Date(created_at);
           const hours = createdAt.getHours();
           const minutes = createdAt.getMinutes();
+
           return (
-            <li key={id || image_id} className={styles.item}>
+            <li key={id || image_id} className={classes(styles.item, 'appear-top')}>
               <time className={styles.time}>
                 {hours}:{minutes < 10 ? `0${minutes}` : minutes}
               </time>
               <span className={styles.info}>
-                Image ID: <b>{image_id}</b> was added to{" "}
-                {value > 0 ? "Likes" : value < 0 ? "Dislikes" : "Favorites"}
+                Image ID: <b>{image_id}</b> was added to{' '}
+                {value > 0 ? 'Likes' : value < 0 ? 'Dislikes' : 'Favorites'}
               </span>
               <span className={styles.status}>
                 {value < 0 ? (

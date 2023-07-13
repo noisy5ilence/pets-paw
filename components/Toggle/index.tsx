@@ -1,12 +1,12 @@
-import { FC, InputHTMLAttributes, useRef, KeyboardEvent } from "react";
+import { FC, InputHTMLAttributes, KeyboardEvent,useRef } from 'react';
 
-import classes from "./styles.module.css";
+import classes from './styles.module.css';
 
 const Toggle: FC<InputHTMLAttributes<HTMLInputElement>> = ({ ...props }) => {
   const selectRef = useRef<HTMLInputElement>(null);
 
   const handleLabelKeyDown = (event: KeyboardEvent<HTMLLabelElement>) => {
-    if (event.code !== "Space") return;
+    if (event.code !== 'Space') return;
 
     selectRef.current?.click();
   };

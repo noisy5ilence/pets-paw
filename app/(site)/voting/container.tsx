@@ -1,27 +1,29 @@
-"use client";
+'use client';
 
-import type { Metadata } from "next";
-import { title } from "@/constants/title";
+import { useState } from 'react';
+import classes from 'classnames';
+import type { Metadata } from 'next';
 
-import Image from "next/image";
+import Pet from '@/app/(site)/voting/components/RandomPet';
+import useRandomPet from '@/app/(site)/voting/useRandomPet';
+import Loader from '@/components/Loader';
+import { title } from '@/constants/title';
 
-import styles from "./styles.module.css";
-import Activities from "./components/Activities";
-import Logs from "./components/Logs";
-import useRandomCat from "./useRandomCat";
-import { useState } from "react";
-import Loader from "@/components/Loader";
-import useLogs from "./useLogs";
+import Activities from './components/Activities';
+import Logs from './components/Logs';
+import useLogs from './useLogs';
+
+import styles from './styles.module.css';
 
 export const metadata: Metadata = {
   title: `Voting - ${title}`,
 };
 
 export default function Voting() {
-  const { cat, onChangeCat, isLoading } = useRandomCat();
+  const { pet, onChangePet, isLoading } = useRandomPet();
   const [isImageLoading, setIsImageLoading] = useState(true);
 
-  const { logs, favoriteId } = useLogs({ catId: cat?.id });
+  const { logs, favoriteId } = useLogs({ petId: pet?.id });
 
   if (isLoading) {
     return (
@@ -33,24 +35,17 @@ export default function Voting() {
 
   return (
     <div className={styles.voting}>
-      <figure className={styles.photo}>
-        <Image
-          src={cat!.url}
-          layout="fill"
-          alt="Cat"
-          onLoadingComplete={() => {
-            setIsImageLoading(false);
-          }}
-        />
+      <figure className={classes(styles.photo)}>
+        <Pet pet={pet} onLoadingComplete={() => setIsImageLoading(false)}/>
       </figure>
-      <div className={styles.activities}>
+      <div className={classes(styles.activities)}>
         <Activities
           disabled={isImageLoading}
-          cat={cat}
+          pet={pet}
           favoriteId={favoriteId}
           onChangeCat={() => {
             setIsImageLoading(true);
-            onChangeCat();
+            onChangePet();
           }}
         />
       </div>

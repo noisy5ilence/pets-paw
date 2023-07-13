@@ -1,0 +1,75 @@
+.appear-bottom {
+  animation: appearBottom ease-in-out 300ms;
+}
+
+.appear-top {
+  animation: appearTop ease-in-out 300ms;
+}
+
+.appear-right {
+  animation: appearRight ease-in-out 300ms;
+}
+
+.appear-left {
+  animation: appearLeft ease-in-out 300ms;
+}
+
+.disappear-top {
+  animation: disappearTop ease-in-out 300ms forwards;
+}
+
+
+@keyframes appearLeft {
+  0% {
+    opacity: .5;
+    transform: translate3d(-100px, 0, 0) scale(.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes appearRight {
+  0% {
+    opacity: .5;
+    transform: translate3d(100px, 0, 0) scale(.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes appearTop {
+  0% {
+    opacity: .5;
+    transform: translate3d(0, -100px, 0) scale(.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes appearBottom {
+  0% {
+    opacity: .5;
+    transform: translate3d(0, 100px, 0) scale(.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes disappearTop {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -100px, 0) scale(.96);
+  }
+}

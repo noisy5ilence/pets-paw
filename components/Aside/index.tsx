@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { FC, ReactNode } from "react";
-import classes from "classnames";
+import { FC, ReactNode } from 'react';
+import classes from 'classnames';
+import { usePathname } from 'next/navigation';
 
-import Navigation from "@/components/Navigation";
+import Navigation from '@/components/Navigation';
 
-import styles from "./styles.module.css";
-import { usePathname } from "next/navigation";
+import styles from './styles.module.css';
 
 const Aside: FC<{ header: ReactNode }> = ({ header }) => {
   const pathname = usePathname();
 
   return (
     <aside
-      className={classes(styles.root, { [styles.isHide]: pathname !== "/" })}
+      className={classes(styles.root, 'appear-left', { [styles.isHide]: pathname !== '/' })}
     >
       <div className={styles.aside}>
         <div className={styles.header}>{header}</div>

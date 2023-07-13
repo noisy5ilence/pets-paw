@@ -1,4 +1,4 @@
-type Theme = "light" | "dark";
+type Theme = 'light' | 'dark';
 
 interface SuccessResponse {
   message: string;
@@ -52,7 +52,7 @@ interface Option<V = string> {
   label: string;
 }
 
-interface RandomCat {
+interface RandomPet {
   breeds: Breed[];
   id: string;
   url: string;

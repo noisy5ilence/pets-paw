@@ -1,7 +1,4 @@
-.root {
-}
-
-.content {
+.container {
   max-width: 680px;
   width: 100%;
   display: flex;
@@ -27,7 +24,7 @@
 }
 
 @media screen and (max-width: 1150px) {
-  .content {
+  .container {
     max-width: 100%;
   }
 }
