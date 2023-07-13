@@ -1,0 +1,98 @@
+.root {
+  overflow: auto;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.grid {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-gap: 20px;
+
+  grid-template-areas:
+    "A B C"
+    "A D D"
+    "E D D"
+    "c b a"
+    "d d a"
+    "d d e";
+  grid-auto-rows: max-content;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.photo:nth-child(10n + 1),
+.photo:nth-child(10n + 8) {
+  max-width: 420px;
+  height: 300px;
+  grid-area: A;
+}
+.photo:nth-child(10n + 8) {
+  grid-area: a;
+}
+
+.photo:nth-child(10n + 2) {
+  grid-area: B;
+}
+.photo:nth-child(10n + 7) {
+  grid-area: b;
+}
+
+.photo:nth-child(10n + 3) {
+  grid-area: C;
+}
+.photo:nth-child(10n + 6) {
+  grid-area: c;
+}
+
+.photo:nth-child(10n + 4),
+.photo:nth-child(10n + 9) {
+  max-width: 420px;
+  height: 300px;
+  grid-area: D;
+}
+.photo:nth-child(10n + 9) {
+  grid-area: d;
+}
+
+.photo:nth-child(10n + 5) {
+  grid-area: E;
+}
+.photo:nth-child(10n + 10) {
+  grid-area: e;
+}
+
+.photo {
+  position: relative;
+  border-radius: 20px;
+  max-width: 200px;
+  height: 140px;
+  min-width: 100%;
+  overflow: hidden;
+}
+
+.photo img {
+  object-fit: cover;
+}
+
+@media screen and (max-width: 550px) {
+  .photo,
+  .photo:nth-child(10n + 1),
+  .photo:nth-child(10n + 8),
+  .photo:nth-child(10n + 4),
+  .photo:nth-child(10n + 9) {
+    height: 295px;
+    max-width: 100%;
+  }
+  .grid {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 10px;
+  }
+}

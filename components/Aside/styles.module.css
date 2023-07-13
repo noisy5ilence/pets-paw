@@ -1,0 +1,48 @@
+.root {
+  width: 43.8405%;
+  display: flex;
+  justify-content: center;
+}
+
+.aside {
+  max-width: 446px;
+  width: 100%;
+}
+
+.header {
+}
+
+.title {
+  margin-top: 80px;
+  color: var(--color-primary);
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 58px;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: var(--color-placeholder);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.description {
+  margin-top: 60px;
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.navigation {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1150px) {
+  .root {
+    width: 100%;
+  }
+  .root.isHide {
+    display: none;
+  }
+}

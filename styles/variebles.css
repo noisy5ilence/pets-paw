@@ -1,0 +1,60 @@
+:root {
+  --color-1: #ffffff;
+  --color-2: #ff868e;
+  --color-placeholder: #8c8c8c;
+  --color-4: #fbe0dc;
+  --color-5: #f8f8f7;
+  --color-7: #97eab9;
+  --color-8: #b4b7ff;
+  --color-9: #ffd280;
+  --color-10: #7b61ff;
+  --color-11: #000000;
+  --color-12: rgba(151, 234, 185, 0.3);
+  --color-13: rgba(255, 134, 142, 0.6);
+  --color-14: rgba(255, 134, 142, 0.3);
+  --color-15: rgba(255, 210, 128, 0.3);
+  --color-16: rgba(255, 255, 255, 0.5);
+  --color-popup-overlay: rgba(29, 29, 29, 0.6);
+
+  --outside-gap: 30px;
+  --main-width: 680px;
+  --animation-duration: 150ms;
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --outside-gap: 20px;
+  }
+}
+
+body[data-theme="light"] {
+  --color-element-background: #ffffff;
+  --color-figure-color: #fbe0dc;
+  --color-background: #f8f8f7;
+  --color-primary-background: #ffffff;
+  --color-primary: #1d1d1d;
+  --color-default-button: #ffffff;
+  --color-icon-background: #fbe0dc;
+  --color-alt-icon-background: #fbe0dc;
+  --color-popup-background: #f8f8f7;
+  --color-border: #ffffff;
+  --color-list-item-background: #f8f8f7;
+  transition: background linear var(--animation-duration),
+    color linear var(--animation-duration);
+}
+
+body[data-theme="dark"] {
+  --color-element-background: rgba(255, 255, 255, 0.05);
+  --color-figure-color: rgba(255, 255, 255, 0.1);
+  --color-background: #1d1d1d;
+  --color-primary: #ffffff;
+  --color-primary-background: #1d1d1d;
+  --color-default-button: rgba(255, 255, 255, 0.1);
+  --color-icon-background: rgba(255, 255, 255, 0.1);
+  --color-alt-icon-background: rgba(255, 134, 142, 0.2);
+  --color-popup-background: #282828;
+  --color-border: #282828;
+  --color-list-item-background: rgba(255, 255, 255, 0.05);
+  transition: background linear var(--animation-duration),
+    color linear var(--animation-duration);
+}
