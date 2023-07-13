@@ -1,0 +1,35 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sideMenu {
+  order: 0;
+  display: none;
+}
+
+.search {
+  flex-grow: 1;
+  max-width: 470px;
+}
+
+.navigation {
+  margin-left: auto;
+}
+
+@media screen and (max-width: 1150px) {
+  .sideMenu {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .root {
+    flex-wrap: wrap;
+  }
+  .search {
+    order: 2;
+    max-width: 100%;
+  }
+}
