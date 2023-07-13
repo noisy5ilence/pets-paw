@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 
-import API from "./api";
+import API from './api';
 
 export default function useRandomCat() {
   const [catIndex, setCatIndex] = useState(0);
   const { data, refetch, isLoading } = useQuery(
-    ["randomCats"],
+    ['randomCats'],
     API.randomCats,
     {
       keepPreviousData: true,
@@ -22,7 +22,7 @@ export default function useRandomCat() {
     };
   }, [refetch]);
 
-  const [cats, setCats] = useState<RandomCat[]>(data || []);
+  const [cats, setCats] = useState<RandomPet[]>(data || []);
 
   const handleChangeCat = () => {
     if (catIndex === cats!.length - 5) {
