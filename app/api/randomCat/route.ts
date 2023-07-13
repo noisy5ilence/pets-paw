@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
-import server from "@/network/server";
+import server from '@/network/server';
 
 export async function GET() {
-  const data: RandomCat[] = await server.get("/images/search", {
+  const data: RandomPet[] = await server.get('/images/search', {
     params: {
       limit: 10,
     },

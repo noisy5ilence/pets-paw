@@ -1,22 +1,26 @@
-import Toolbar from "@/components/Toolbar";
+import { ReactNode } from 'react';
+import classes from 'classnames';
 
-import styles from "./layout.module.css";
-import { Breadcrumbs } from "@/components/Breadcrumbs";
-import ReactQueryProvider from "@/components/ReactQueryProvider";
+import { Breadcrumbs } from '@/components/Breadcrumbs';
+import Toolbar from '@/components/Toolbar';
+
+import Providers from '../../components/Providers';
+
+import styles from './layout.module.css';
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
-    <ReactQueryProvider>
+    <Providers>
       <main className={styles.root}>
-        <div className={styles.content}>
+        <div className={styles.container}>
           <div className={styles.toolbar}>
             <Toolbar />
           </div>
-          <div className={styles.page}>
+          <div className={classes(styles.page, 'appear-right')}>
             <div className={styles.breadcrumbs}>
               <Breadcrumbs />
             </div>
@@ -24,6 +28,6 @@ export default function RootLayout({
           </div>
         </div>
       </main>
-    </ReactQueryProvider>
+    </Providers>
   );
 }

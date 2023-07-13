@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
 
-import Navigation from "@/components/Navigation";
-import Popup from "@/components/Popup";
+import Navigation from '@/components/Navigation';
+import Popup from '@/components/Popup';
 
-import classes from "./styles.module.css";
+import classes from './styles.module.css';
 
 const SideMenu: FC = () => {
   const [isShowSideMenu, setIsShowSideMenu] = useState(false);

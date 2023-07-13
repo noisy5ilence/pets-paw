@@ -1,6 +1,6 @@
-import { InputHTMLAttributes, forwardRef } from "react";
+import { forwardRef,InputHTMLAttributes } from 'react';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 export const Select = forwardRef<
   HTMLSelectElement,
@@ -27,4 +27,4 @@ export const Select = forwardRef<
   );
 });
 
-Select.displayName = "Select";
+Select.displayName = 'Select';

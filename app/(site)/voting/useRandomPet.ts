@@ -3,15 +3,15 @@ import { useQuery } from 'react-query';
 
 import API from './api';
 
-export default function useRandomCat() {
-  const [catIndex, setCatIndex] = useState(0);
+export default function useRandomPet() {
+  const [petIndex, setCatIndex] = useState(0);
   const { data, refetch, isLoading } = useQuery(
     ['randomCats'],
     API.randomCats,
     {
       keepPreviousData: true,
-      onSuccess(cats) {
-        setCats((state) => state.concat(cats));
+      onSuccess(pets) {
+        setPets((state) => state.concat(pets));
       },
     }
   );
@@ -22,21 +22,21 @@ export default function useRandomCat() {
     };
   }, [refetch]);
 
-  const [cats, setCats] = useState<RandomPet[]>(data || []);
+  const [pets, setPets] = useState<RandomPet[]>(data || []);
 
   const handleChangeCat = () => {
-    if (catIndex === cats!.length - 5) {
+    if (petIndex === pets!.length - 5) {
       refetch();
     }
 
-    const nextIndex = catIndex + 1;
+    const nextIndex = petIndex + 1;
 
     setCatIndex(nextIndex);
   };
 
   return {
     isLoading,
-    cat: cats?.[catIndex],
-    onChangeCat: handleChangeCat,
+    pet: pets?.[petIndex],
+    onChangePet: handleChangeCat,
   };
 }

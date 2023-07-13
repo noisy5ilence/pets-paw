@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { FC } from "react";
+import { FC } from 'react';
 
-import Toggle from "@/components/Toggle";
-import { useTheme } from "@/hooks/useTheme";
+import Toggle from '@/components/Toggle';
+import { useTheme } from '@/hooks/useTheme';
 
-import classes from "./styles.module.css";
+import classes from './styles.module.css';
 
 type Props = {
   initialTheme: Theme;
@@ -17,7 +17,7 @@ const ThemeToggle: FC<Props> = ({ initialTheme }) => {
   return (
     <div className={classes.root}>
       <figure className={classes.indicator}>
-        {theme === "dark" ? (
+        {theme === 'dark' ? (
           <svg
             width="16"
             height="9"
@@ -51,8 +51,8 @@ const ThemeToggle: FC<Props> = ({ initialTheme }) => {
       </figure>
       <Toggle
         title="Theme toggle"
-        checked={theme === "dark"}
-        onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+        checked={theme === 'dark'}
+        onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       />
     </div>
   );

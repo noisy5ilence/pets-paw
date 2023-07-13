@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import { title } from "@/constants/title";
+import type { Metadata } from 'next';
 
-import VotingContainer from "./container";
+import { title } from '@/constants/title';
+
+import VotingContainer from './container';
 
 export const metadata: Metadata = {
   title: `Voting - ${title}`,

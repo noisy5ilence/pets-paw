@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
-import { title } from "@/constants/title";
+import type { Metadata } from 'next';
+
+import { title } from '@/constants/title';
 
 export const metadata: Metadata = {
   title: `Breeds - ${title}`,

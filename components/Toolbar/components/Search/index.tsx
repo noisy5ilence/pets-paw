@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import cn from "classnames";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
+import cn from 'classnames';
+import { useRouter } from 'next/navigation';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 const Search: FC = () => {
   const router = useRouter();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   const handleChange = ({
     target: { value },
@@ -34,7 +34,7 @@ const Search: FC = () => {
       />
       <button
         tabIndex={-1}
-        className={cn("button", styles.submit)}
+        className={cn('button', styles.submit)}
         type="submit"
       >
         <svg

@@ -1,25 +1,35 @@
-import cn from "classnames";
-import { FC, ReactElement } from "react";
-import { createPortal } from "react-dom";
+'use client';
 
-import styles from "./styles.module.css";
+import { FC, ReactElement, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import cn from 'classnames';
+
+import styles from './styles.module.css';
 
 interface Props {
   children: ReactElement;
   onClose: () => void;
   isHideOverlay?: boolean;
+  className?: string;
 }
 
-const Popup: FC<Props> = ({ children, onClose, isHideOverlay }) => {
+const Popup: FC<Props> = ({ children, onClose, isHideOverlay, className }) => {
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const handleClose = () => {
+    bodyRef.current?.classList.add('disappear-top');
+
+    bodyRef.current?.addEventListener('animationend', onClose, { once: true });
+  };
   return createPortal(
     <div
       className={cn(styles.overlay, { [styles.hideOverlay]: isHideOverlay })}
     >
       <div
-        className={cn(styles.popup, { [styles.hideOverlay]: isHideOverlay })}
+        ref={bodyRef}
+        className={cn(styles.popup, 'appear-bottom', className, { [styles.hideOverlay]: isHideOverlay })}
       >
         <div className={styles.header}>
-          <button className="button vector" onClick={onClose}>
+          <button className="button vector" onClick={handleClose}>
             <svg
               width="18"
               height="18"

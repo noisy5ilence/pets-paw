@@ -1,7 +1,8 @@
-import Link from "next/link";
-import styles from "./styles.module.css";
+import Link from 'next/link';
 
-import { title } from "@/constants/title";
+import { title } from '@/constants/title';
+
+import styles from './styles.module.css';
 
 const Logo = () => {
   return (

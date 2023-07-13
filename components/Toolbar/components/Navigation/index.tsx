@@ -1,16 +1,17 @@
-"use client";
+'use client';
 
-import cn from "classnames";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { FC, ReactElement } from "react";
-import { routes } from "@/constants/routes";
+import { FC, ReactElement } from 'react';
+import cn from 'classnames';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import styles from "./styles.module.css";
+import { routes } from '@/constants/routes';
+
+import styles from './styles.module.css';
 
 const items: [keyof typeof routes, ReactElement][] = [
   [
-    "likes",
+    'likes',
     <svg
       key="likes"
       width="30"
@@ -28,7 +29,7 @@ const items: [keyof typeof routes, ReactElement][] = [
     </svg>,
   ],
   [
-    "favourites",
+    'favourites',
     <svg
       key="favourites"
       width="30"
@@ -46,7 +47,7 @@ const items: [keyof typeof routes, ReactElement][] = [
     </svg>,
   ],
   [
-    "dislikes",
+    'dislikes',
     <svg
       key="dislikes"
       width="30"
@@ -80,7 +81,7 @@ const Navigation: FC = () => {
               <Link href={route.path}>
                 <button
                   tabIndex={-1}
-                  className={cn("button vector", { active: isActive })}
+                  className={cn('button vector', { active: isActive })}
                 >
                   {icon}
                 </button>
