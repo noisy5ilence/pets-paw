@@ -1,9 +1,17 @@
 .root {
   overflow: auto;
+  overflow-x: hidden;
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: 20px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .grid {
@@ -13,68 +21,44 @@
   width: 100%;
   height: 100%;
 
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 140px;
+
   display: grid;
   grid-gap: 20px;
-
-  grid-template-areas:
-    "A B C"
-    "A D D"
-    "E D D"
-    "c b a"
-    "d d a"
-    "d d e";
-  grid-auto-rows: max-content;
-  grid-template-columns: repeat(3, 1fr);
 }
 
 .photo:nth-child(10n + 1),
 .photo:nth-child(10n + 8) {
-  max-width: 420px;
   height: 300px;
-  grid-area: A;
-}
-.photo:nth-child(10n + 8) {
-  grid-area: a;
-}
-
-.photo:nth-child(10n + 2) {
-  grid-area: B;
-}
-.photo:nth-child(10n + 7) {
-  grid-area: b;
-}
-
-.photo:nth-child(10n + 3) {
-  grid-area: C;
-}
-.photo:nth-child(10n + 6) {
-  grid-area: c;
+  grid-row: auto / span 2;
 }
 
 .photo:nth-child(10n + 4),
 .photo:nth-child(10n + 9) {
-  max-width: 420px;
   height: 300px;
-  grid-area: D;
-}
-.photo:nth-child(10n + 9) {
-  grid-area: d;
-}
-
-.photo:nth-child(10n + 5) {
-  grid-area: E;
-}
-.photo:nth-child(10n + 10) {
-  grid-area: e;
+  max-width: 420px;
+  grid-row: auto / span 2;
+  grid-column: auto / span 2;
 }
 
 .photo {
+  display: flex;
+  align-items: center;
   position: relative;
   border-radius: 20px;
   max-width: 200px;
   height: 140px;
   min-width: 100%;
   overflow: hidden;
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity linear var(--animation-duration), transform ease-in var(--animation-duration);
+}
+
+.photo.loaded {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .photo img {
@@ -88,6 +72,7 @@
   .photo:nth-child(10n + 4),
   .photo:nth-child(10n + 9) {
     height: 295px;
+    min-height: 295px;
     max-width: 100%;
   }
   .grid {
