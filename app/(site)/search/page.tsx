@@ -5,9 +5,9 @@ import { title } from '@/constants/title';
 import Container from './container';
 
 export const metadata: Metadata = {
-  title: `Breeds - ${title}`
+  title: `Search - ${title}`
 };
 
-export default function Breeds() {
+export default function Search() {
   return <Container />;
 }

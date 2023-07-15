@@ -36,12 +36,12 @@
 .button:disabled:hover,
 .button:disabled:active {
   background: var(--color-19);
-  color: var(--color-20);
+  color: var(--color-placeholder);
   cursor: not-allowed;
 }
 
 .button:disabled path,
 .button:disabled:hover path,
 .button:disabled:active path {
-  fill: var(--color-20);
+  fill: var(--color-placeholder);
 }

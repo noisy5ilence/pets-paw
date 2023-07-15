@@ -2,7 +2,7 @@
 
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import cn from 'classnames';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import SearchIcon from './icons/search.svg';
 
@@ -10,7 +10,8 @@ import styles from './styles.module.css';
 
 const Search: FC = () => {
   const router = useRouter();
-  const [query, setQuery] = useState('');
+  const initialQuery = useSearchParams().get('query');
+  const [query, setQuery] = useState(initialQuery || '');
 
   const handleChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setQuery(value);
