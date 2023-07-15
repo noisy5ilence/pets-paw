@@ -30,7 +30,7 @@ const Paginator: FC<Props> = ({ total, page, perPage = total, name, onChange }) 
         <figure className={styles.icon}>
           <PreviousIcon />
         </figure>
-        NEXT
+        PREV
       </button>
       <button
         className={classes('button', styles.button)}
@@ -40,7 +40,7 @@ const Paginator: FC<Props> = ({ total, page, perPage = total, name, onChange }) 
           return onChange({ target: { value: `${nextPage > totalPages ? totalPages : nextPage}`, name } });
         }}
       >
-        PREV
+        NEXT
         <figure className={styles.icon}>
           <NextIcon />
         </figure>

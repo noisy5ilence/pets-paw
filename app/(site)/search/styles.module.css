@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.label {
+  font-weight: 400;
+  color: var(--color-placeholder);
+}
+
+.query {
+  margin-left: 8px;
+  font-weight: 500;
+  color: var(--color-primary);
+}
