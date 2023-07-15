@@ -13,7 +13,7 @@ export default function useVote({ pet }: { pet?: RandomPet }) {
       setVotes((state) => {
         return [
           { image_id: pet?.id, value: vote, image: { id: pet?.id, url: pet?.url }, created_at: new Date() } as Vote,
-          ...(state || []),
+          ...(state || [])
         ];
       });
       return API.votes.vote({ vote, petId: pet?.id! });
@@ -23,7 +23,7 @@ export default function useVote({ pet }: { pet?: RandomPet }) {
         setVotes((state) => {
           return state?.filter(({ image_id }) => image_id !== pet?.id) || [];
         });
-      },
+      }
     }
   );
 }

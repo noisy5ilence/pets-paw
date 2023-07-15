@@ -7,7 +7,7 @@ export async function GET() {
   const sub_id = uid();
 
   const data: Favorite[] = await server.get('/favourites', {
-    params: { sub_id, limit: false },
+    params: { sub_id, limit: false }
   });
 
   return NextResponse.json(data);
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
   const data: Favorite = await server.post('/favourites', {
     ...body,
-    sub_id,
+    sub_id
   });
 
   return NextResponse.json(data);

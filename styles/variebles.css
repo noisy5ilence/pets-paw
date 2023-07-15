@@ -18,7 +18,10 @@
 
   --outside-gap: 30px;
   --main-width: 680px;
-  --animation-duration: 150ms;
+
+  --delay: 500ms;
+  --duration-default: 150ms;
+  --duration-long: 300ms;
 }
 
 @media screen and (max-width: 767px) {
@@ -39,8 +42,8 @@ body[data-theme="light"] {
   --color-popup-background: #f8f8f7;
   --color-border: #ffffff;
   --color-list-item-background: #f8f8f7;
-  transition: background linear var(--animation-duration),
-    color linear var(--animation-duration);
+  transition: background linear var(--duration-default),
+    color linear var(--duration-default);
 }
 
 body[data-theme="dark"] {
@@ -55,6 +58,6 @@ body[data-theme="dark"] {
   --color-popup-background: #282828;
   --color-border: #282828;
   --color-list-item-background: rgba(255, 255, 255, 0.05);
-  transition: background linear var(--animation-duration),
-    color linear var(--animation-duration);
+  transition: background linear var(--duration-default),
+    color linear var(--duration-default);
 }

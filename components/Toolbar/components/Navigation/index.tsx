@@ -1,11 +1,13 @@
 'use client';
 
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useEffect, useLayoutEffect, useRef } from 'react';
 import cn from 'classnames';
+import { useAtomValue } from 'jotai';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { routes } from '@/constants/routes';
+import updateLogsAtom from '@/constants/updateLogsAtom';
 
 import styles from './styles.module.css';
 
@@ -29,7 +31,7 @@ const items: [keyof typeof routes, ReactElement][] = [
     </svg>,
   ],
   [
-    'favourites',
+    'favorites',
     <svg
       key="favourites"
       width="30"
@@ -68,6 +70,21 @@ const items: [keyof typeof routes, ReactElement][] = [
 
 const Navigation: FC = () => {
   const pathname = usePathname();
+  const update = useAtomValue(updateLogsAtom);
+  const itemsRef = useRef<Record<string, HTMLLIElement>>({})
+
+  useLayoutEffect(() => {
+    if (!update) return;
+
+    const { type } = update;
+
+    const item = itemsRef.current[type];
+
+    if (!item) return;
+
+    item.classList.add('pulse');
+    item.onanimationend = () => item.classList.remove('pulse');
+  }, [update]);
 
   return (
     <nav className={styles.root}>
@@ -77,7 +94,11 @@ const Navigation: FC = () => {
           const isActive = pathname.includes(route.path);
 
           return (
-            <li className={styles.item} key={key} title={key}>
+            <li
+              key={key} title={key}
+              className={styles.item}
+              ref={element => itemsRef.current[key] = element!}
+            >
               <Link href={route.path}>
                 <button
                   tabIndex={-1}

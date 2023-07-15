@@ -11,7 +11,7 @@ const handleResponse = (response: AxiosResponse): AxiosResponse['data'] =>
 server.interceptors.response.use(handleResponse);
 
 server.defaults.headers.common['x-api-key'] =
-  process.env.NEXT_PUBLIC_CAT_API_KEY!;
+  process.env.CAT_API_KEY!;
 
 server.interceptors.request.use(async (request) => {
   const cookieStore = cookies();

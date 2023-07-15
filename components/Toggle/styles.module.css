@@ -30,10 +30,10 @@
   border-radius: 40px;
   width: 16px;
   height: 16px;
-  transition: margin-left linear var(--animation-duration);
+  transition: margin-left linear var(--duration-default);
 }
 
 .input:checked + .indicator {
   margin-left: 20px;
-  transition: margin-left ease-out var(--animation-duration);
+  transition: margin-left ease-out var(--duration-default);
 }

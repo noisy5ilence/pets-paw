@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, ReactNode, useEffect, useRef } from 'react';
 import classes from 'classnames';
 import NextImage from 'next/image';
 
@@ -7,16 +7,19 @@ import imageStub from '@/public/photo-stub.svg';
 
 import styles from './styles.module.css';
 
-type Photos = Array<{ image: Image | undefined; name: string }>;
-
 interface Props {
-  photos: Photos;
+  photos: GridImage[];
   className?: string;
   isLoading?: boolean;
+  children?: (children: ReactNode[], hoveredClassName: string) => ReactNode[];
 }
 
-const Grid: FC<Props> = ({ photos, className, isLoading }) => {
+const Grid: FC<Props> = ({ photos, className, isLoading, children }) => {
   const loadedImages = useRef(0);
+
+  useEffect(() => {
+    loadedImages.current = 0;
+  }, [photos]);
 
   if (isLoading) {
     return (
@@ -36,21 +39,29 @@ const Grid: FC<Props> = ({ photos, className, isLoading }) => {
     photo.style.transitionDelay = `${loadedImages.current * 100}ms`;
   };
 
+  const images = photos.map(({ image, name }) => {
+    return (
+      <NextImage
+        key={name}
+        onLoadingComplete={handleLoadImage}
+        src={image?.url || imageStub.src}
+        width={image?.url ? undefined : 200}
+        height={image?.url ? undefined : 200}
+        layout={image?.url ? 'fill' : 'row'}
+        alt={name}
+      />
+    );
+  });
+
+  const imageNodes = children?.(images, styles.action) || images;
+
   return (
     <div className={styles.root} onScroll={() => loadedImages.current = 0}>
       <div className={classes(styles.grid, className)}>
-        {photos.map(({ image, name }) => {
+        {photos.map(({ name }, index) => {
           return (
-            <figure key={name} className={styles.photo}>
-              <NextImage
-                onLoadingComplete={handleLoadImage}
-                src={image?.url || imageStub.src}
-                placeholder="empty"
-                width={image?.url ? undefined : 200}
-                height={image?.url ? undefined : 200}
-                layout={image?.url ? 'fill' : 'row'}
-                alt={name}
-              />
+            <figure key={name} className={classes(styles.photo, { [styles.withAction]: Boolean(children) })}>
+              {imageNodes[index]}
             </figure>
           );
         })}

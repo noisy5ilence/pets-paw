@@ -10,9 +10,9 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  transition: background-color linear var(--animation-duration),
-    color linear var(--animation-duration),
-    transform linear var(--animation-duration);
+  transition: background-color linear var(--duration-default),
+    color linear var(--duration-default),
+    transform linear var(--duration-default);
   cursor: pointer;
 }
 

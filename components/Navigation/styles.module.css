@@ -34,16 +34,16 @@
 @media (hover: hover) {
   .link:hover .card div {
     border-color: var(--color-1);
-    transition: all linear var(--animation-duration);
+    transition: all linear var(--duration-default);
   }
 }
 
 .link:active .card div {
   border-color: var(--color-4);
-  transition: all linear var(--animation-duration);
+  transition: all linear var(--duration-default);
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 550px) {
   .card {
     display: none;
   }

@@ -1,23 +1,26 @@
 .appear-bottom {
-  animation: appearBottom ease-in-out 300ms;
+  animation: appearBottom ease-in-out var(--duration-long);
 }
 
 .appear-top {
-  animation: appearTop ease-in-out 300ms;
+  animation: appearTop ease-in-out var(--duration-long);
 }
 
 .appear-right {
-  animation: appearRight ease-in-out 300ms;
+  animation: appearRight ease-in-out var(--duration-long);
 }
 
 .appear-left {
-  animation: appearLeft ease-in-out 300ms;
+  animation: appearLeft ease-in-out var(--duration-long);
 }
 
 .disappear-top {
-  animation: disappearTop ease-in-out 300ms forwards;
+  animation: disappearTop ease-in-out var(--duration-long) forwards;
 }
 
+.pulse {
+  animation: pulse ease-in-out 1s;
+}
 
 @keyframes appearLeft {
   0% {
@@ -71,5 +74,35 @@
   100% {
     opacity: 0;
     transform: translate3d(0, -100px, 0) scale(.96);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scaleX(1)
+  }
+
+  30% {
+    transform: scale3d(1.25,.75,1)
+  }
+
+  40% {
+    transform: scale3d(.75,1.25,1)
+  }
+
+  50% {
+    transform: scale3d(1.15,.85,1)
+  }
+
+  65% {
+    transform: scale3d(.95,1.05,1)
+  }
+
+  75% {
+    transform: scale3d(1.05,.95,1)
+  }
+
+  to {
+    transform: scaleX(1)
   }
 }

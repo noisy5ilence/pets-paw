@@ -10,6 +10,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
+            keepPreviousData: true,
             staleTime: Number.POSITIVE_INFINITY,
           },
         },

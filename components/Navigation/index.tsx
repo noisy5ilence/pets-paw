@@ -21,8 +21,11 @@ const items: [keyof typeof routes, string, StaticImageData][] = [
   ['gallery', 'var(--color-9)', gallery],
 ];
 
+interface Props {
+  onRedirect?: () => void;
+}
 
-const Navigation: FC = () => {
+const Navigation: FC<Props> = ({ onRedirect }) => {
   const path = usePathname();
 
   return (
@@ -34,7 +37,7 @@ const Navigation: FC = () => {
 
           return (
             <li key={key} className={styles.item}>
-              <Link href={route.path} className={styles.link}>
+              <Link href={route.path} className={styles.link} onClick={onRedirect}>
                 <div className={styles.card}>
                   <Card
                     color={color}

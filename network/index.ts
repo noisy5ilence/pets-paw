@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 const client = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: `${process.env.NEXT_PUBLIC_PETS_PAW_BASE}/api`,
 });
 
 const handleResponse = (response: AxiosResponse): AxiosResponse['data'] =>
