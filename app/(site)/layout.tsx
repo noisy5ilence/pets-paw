@@ -3,16 +3,13 @@ import classes from 'classnames';
 
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Toolbar from '@/components/Toolbar';
+import breadcrumbsPortalId from '@/constants/breadcrumbsPortalId';
 
 import Providers from '../../components/Providers';
 
 import styles from './layout.module.css';
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <Providers>
       <main className={styles.root}>
@@ -21,7 +18,7 @@ export default function RootLayout({
             <Toolbar />
           </div>
           <div className={classes(styles.page, 'appear-right')}>
-            <div className={styles.breadcrumbs}>
+            <div className={styles.breadcrumbs} id={breadcrumbsPortalId}>
               <Breadcrumbs />
             </div>
             {children}

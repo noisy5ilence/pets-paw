@@ -29,9 +29,9 @@ export const routes = {
     path: '/dislikes',
     as: '/dislikes'
   },
-  favourites: {
-    title: 'favourites',
-    path: '/favourites',
-    as: '/favourites'
+  favorites: {
+    title: 'favorites',
+    path: '/favorites',
+    as: '/favorites'
   }
 };

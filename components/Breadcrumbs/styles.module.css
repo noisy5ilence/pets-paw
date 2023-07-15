@@ -19,8 +19,8 @@
   color: var(--color-2);
   position: relative;
   letter-spacing: 2px;
-  transition: background linear var(--animation-duration),
-    color linear var(--animation-duration);
+  transition: background linear var(--duration-default),
+    color linear var(--duration-default);
 }
 
 .breadcrumb a:after {

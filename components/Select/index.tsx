@@ -2,7 +2,7 @@ import { forwardRef,InputHTMLAttributes } from 'react';
 
 import styles from './styles.module.css';
 
-export const Select = forwardRef<
+const Select = forwardRef<
   HTMLSelectElement,
   InputHTMLAttributes<HTMLSelectElement>
 >((props, ref) => {
@@ -28,3 +28,4 @@ export const Select = forwardRef<
 });
 
 Select.displayName = 'Select';
+export default Select;

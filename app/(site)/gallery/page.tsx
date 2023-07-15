@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { title } from '@/constants/title';
 
 export const metadata: Metadata = {
-  title: `Gallery - ${title}`,
+  title: `Gallery - ${title}`
 };
 
 export default function Gallery() {

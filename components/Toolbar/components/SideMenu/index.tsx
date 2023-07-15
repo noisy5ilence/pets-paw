@@ -30,9 +30,11 @@ const SideMenu: FC = () => {
       </button>
       {isShowSideMenu && (
         <Popup isHideOverlay onClose={() => setIsShowSideMenu(false)}>
-          <div className={classes.navigation}>
-            <Navigation />
-          </div>
+          { onClose => (
+            <div className={classes.navigation}>
+              <Navigation onRedirect={onClose}/>
+            </div>
+          ) }
         </Popup>
       )}
     </>

@@ -18,8 +18,7 @@
   border-radius: 0;
   width: 80px;
   height: 80px;
-  transition: opacity linear var(--animation-duration),
-    background linear var(--animation-duration);
+  transition: opacity linear var(--duration-default), background linear var(--duration-default);
 }
 
 .item button:disabled {

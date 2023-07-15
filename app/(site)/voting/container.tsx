@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import classes from 'classnames';
 import type { Metadata } from 'next';
 
@@ -16,12 +15,11 @@ import useLogs from './useLogs';
 import styles from './styles.module.css';
 
 export const metadata: Metadata = {
-  title: `Voting - ${title}`,
+  title: `Voting - ${title}`
 };
 
 export default function Voting() {
-  const { pet, onChangePet, isLoading } = useRandomPet();
-  const [isImageLoading, setIsImageLoading] = useState(true);
+  const { pet, onChangePet, isLoading, isRefetching, pets, index } = useRandomPet();
 
   const { logs, favoriteId } = useLogs({ petId: pet?.id });
 
@@ -35,18 +33,15 @@ export default function Voting() {
 
   return (
     <div className={styles.voting}>
-      <figure className={classes(styles.photo)}>
-        <Pet pet={pet} onLoadingComplete={() => setIsImageLoading(false)}/>
+      <figure className={classes(styles.photo, 'appear-bottom')}>
+        <Pet index={index} pets={pets} />
       </figure>
       <div className={classes(styles.activities)}>
         <Activities
-          disabled={isImageLoading}
+          disabled={isRefetching && index + 1 >= pets.length}
           pet={pet}
           favoriteId={favoriteId}
-          onChangeCat={() => {
-            setIsImageLoading(true);
-            onChangePet();
-          }}
+          onChangeCat={onChangePet}
         />
       </div>
       <div className={styles.logs}>

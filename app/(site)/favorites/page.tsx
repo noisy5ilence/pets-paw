@@ -5,7 +5,7 @@ import { title } from '@/constants/title';
 import Container from './container';
 
 export const metadata: Metadata = {
-  title: `Favorites - ${title}`,
+  title: `Favorites - ${title}`
 };
 
 export default function Favorites() {

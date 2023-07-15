@@ -4,7 +4,14 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: var(--radius);
+
+  --radius: 20px;
+  --big-pic-height: 300px;
+  --big-pic-width: 420px;
+  --high-pic-height: 300px;
+  --pic-height: 140px;
+  --pic-width: 200px;
 }
 
 .loading {
@@ -22,38 +29,24 @@
   height: 100%;
 
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 140px;
+  grid-auto-rows: var(--pic-height);
 
   display: grid;
   grid-gap: 20px;
 }
 
-.photo:nth-child(10n + 1),
-.photo:nth-child(10n + 8) {
-  height: 300px;
-  grid-row: auto / span 2;
-}
-
-.photo:nth-child(10n + 4),
-.photo:nth-child(10n + 9) {
-  height: 300px;
-  max-width: 420px;
-  grid-row: auto / span 2;
-  grid-column: auto / span 2;
-}
-
 .photo {
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
-  border-radius: 20px;
   max-width: 200px;
-  height: 140px;
-  min-width: 100%;
+  height: var(--pic-height);
   overflow: hidden;
+  border-radius: var(--radius);
   opacity: 0;
   transform: scale(1.1);
-  transition: opacity linear var(--animation-duration), transform ease-in var(--animation-duration);
+  transition: opacity linear var(--duration-default), transform ease-in var(--duration-default);
 }
 
 .photo.loaded {
@@ -63,10 +56,66 @@
 
 .photo img {
   object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.photo:nth-child(10n + 1),
+.photo:nth-child(10n + 8) {
+  height: var(--high-pic-height);
+  grid-row: auto / span 2;
+}
+
+.photo:nth-child(10n + 4),
+.photo:nth-child(10n + 9) {
+  height: var(--big-pic-height);
+  max-width: var(--big-pic-width);
+  grid-row: auto / span 2;
+  grid-column: auto / span 2;
+}
+
+.photo .action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+  border-radius: 10px;
+  opacity: 1;
+  transition: opacity ease-in-out var(--duration-long);
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: var(--color-1);
+}
+
+.photo:after {
+  content: '';
+  border-radius: var(--radius);
+  transition: background-color ease-in-out var(--duration-default);
+}
+
+@media (hover: hover) {
+  .photo .action {
+    position: static;
+    opacity: 0;
+  }
+  .photo.withAction:hover:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-13);
+  }
+  .photo:hover .action {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 550px) {
   .photo,
+  .photo.photo img,
   .photo:nth-child(10n + 1),
   .photo:nth-child(10n + 8),
   .photo:nth-child(10n + 4),

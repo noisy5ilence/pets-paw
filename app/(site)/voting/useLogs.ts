@@ -28,6 +28,6 @@ export default function useLogs({ petId }: { petId?: string }) {
           log.value = log.value ?? 0;
           return log;
         });
-    }, [favorites, votes]),
+    }, [favorites, votes])
   };
 }

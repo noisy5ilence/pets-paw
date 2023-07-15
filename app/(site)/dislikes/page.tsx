@@ -5,7 +5,7 @@ import { title } from '@/constants/title';
 import Container from './container';
 
 export const metadata: Metadata = {
-  title: `Dislikes - ${title}`,
+  title: `Dislikes - ${title}`
 };
 
 export default function Dislikes() {

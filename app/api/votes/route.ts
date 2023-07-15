@@ -7,7 +7,7 @@ export async function GET() {
   const sub_id = uid();
 
   const data: Vote[] = await server.get('/votes', {
-    params: { sub_id, limit: false },
+    params: { sub_id, limit: false }
   });
 
   return NextResponse.json(data);

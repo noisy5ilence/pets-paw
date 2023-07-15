@@ -1,0 +1,38 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.breed {
+  flex-grow: 1;
+}
+
+.limit {
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 550px) {
+  .limit {
+    grid-area: limit;
+  }
+  .breed {
+    grid-area: breed;
+    margin-right: 0;
+  }
+  .sorting {
+    grid-area: sorting;
+  }
+  .root {
+    flex-shrink: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'breed breed'
+      'limit sorting';
+  }
+}

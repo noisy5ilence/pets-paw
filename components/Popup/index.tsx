@@ -1,13 +1,13 @@
 'use client';
 
-import { FC, ReactElement, useRef } from 'react';
+import { FC, ReactElement, ReactNode, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import cn from 'classnames';
 
 import styles from './styles.module.css';
 
 interface Props {
-  children: ReactElement;
+  children: ReactNode | ((onClose: () => void) => ReactNode);
   onClose: () => void;
   isHideOverlay?: boolean;
   className?: string;
@@ -46,7 +46,7 @@ const Popup: FC<Props> = ({ children, onClose, isHideOverlay, className }) => {
             </svg>
           </button>
         </div>
-        <div className={styles.body}>{children}</div>
+        <div className={styles.body}>{typeof children === 'function' ? children(handleClose) : children}</div>
       </div>
     </div>,
     document.body
