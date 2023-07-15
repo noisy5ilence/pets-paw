@@ -32,7 +32,7 @@ export default function Container() {
     return (
       <>
         {filtersNode}
-        <NoItem>breeds</NoItem>
+        <NoItem replace>No breeds found</NoItem>
       </>
     );
   }

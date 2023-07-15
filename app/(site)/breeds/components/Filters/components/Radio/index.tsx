@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes, ReactElement } from 'react';
+import { ChangeEvent, FC, InputHTMLAttributes, ReactElement } from 'react';
 
 import styles from './styles.module.css';
 
@@ -14,6 +14,12 @@ const Radio: FC<InputHTMLAttributes<HTMLInputElement> & Props> = ({ options, ...
           <input
             type='radio'
             {...props}
+            onClick={(event) => {
+              const { name, value } = event.target as HTMLInputElement;
+              props.onClick?.(event);
+              props.onChange?.({ target: { name, value } } as ChangeEvent<HTMLInputElement>);
+            }}
+            onChange={() => null}
             className={styles.input}
             value={option.value}
             checked={option.value === props.value}
