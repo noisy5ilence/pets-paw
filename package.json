@@ -19,6 +19,7 @@
     "jotai": "^2.2.2",
     "js-cookie": "^3.0.5",
     "next": "13.4.9",
+    "next-plugin-svgr": "^1.1.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "^3.39.3",
@@ -28,6 +29,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.0.1",
     "@types/js-cookie": "^3.0.3",
     "@types/ua-parser-js": "^0.7.36",
     "@types/uuid": "^9.0.2",

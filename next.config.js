@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
+const withSVGR = require('next-plugin-svgr');
 const nextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
-      },
-    ],
-  },
+        hostname: '**'
+      }
+    ]
+  }
 };
 
-module.exports = nextConfig;
+module.exports = withSVGR(nextConfig);
