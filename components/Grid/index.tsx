@@ -3,7 +3,7 @@ import classes from 'classnames';
 import NextImage from 'next/image';
 
 import Loader from '@/components/Loader';
-import imageStub from '@/public/photo-stub.svg';
+import ImageStub from '@/public/photo-stub.svg';
 
 import styles from './styles.module.css';
 
@@ -12,9 +12,10 @@ interface Props {
   className?: string;
   isLoading?: boolean;
   children?: (children: ReactNode[], hoveredClassName: string) => ReactNode[];
+  footer?: ReactNode;
 }
 
-const Grid: FC<Props> = ({ photos, className, isLoading, children }) => {
+const Grid: FC<Props> = ({ photos, className, isLoading, children, footer }) => {
   const loadedImages = useRef(0);
 
   useEffect(() => {
@@ -23,8 +24,8 @@ const Grid: FC<Props> = ({ photos, className, isLoading, children }) => {
 
   if (isLoading) {
     return (
-      <div className={ styles.loading }>
-        <Loader/>
+      <div className={styles.loading}>
+        <Loader />
       </div>
     );
   }
@@ -40,31 +41,35 @@ const Grid: FC<Props> = ({ photos, className, isLoading, children }) => {
   };
 
   const images = photos.map(({ image, name }) => {
-    return (
-      <NextImage
-        key={name}
-        onLoadingComplete={handleLoadImage}
-        src={image?.url || imageStub.src}
-        width={image?.url ? undefined : 200}
-        height={image?.url ? undefined : 200}
-        layout={image?.url ? 'fill' : 'row'}
-        alt={name}
-      />
+    return !image?.url ? (
+      <ImageStub />
+    ) : (
+      <NextImage key={name} onLoadingComplete={handleLoadImage} src={image.url} layout='fill' alt={name} />
     );
   });
 
   const imageNodes = children?.(images, styles.action) || images;
 
   return (
-    <div className={styles.root} onScroll={() => loadedImages.current = 0}>
-      <div className={classes(styles.grid, className)}>
-        {photos.map(({ name }, index) => {
-          return (
-            <figure key={name} className={classes(styles.photo, { [styles.withAction]: Boolean(children) })}>
-              {imageNodes[index]}
-            </figure>
-          );
-        })}
+    <div className={styles.root} onScroll={() => (loadedImages.current = 0)}>
+      <div className={styles.content}>
+        <div className={classes(styles.grid, className)}>
+          {photos.map(({ name, image }, index) => {
+            return (
+              <figure
+                key={name}
+                className={classes(styles.photo, {
+                  [styles.transparent]: Boolean(image?.url),
+                  [styles.stub]: !image?.url,
+                  [styles.withAction]: Boolean(children)
+                })}
+              >
+                {imageNodes[index]}
+              </figure>
+            );
+          })}
+        </div>
+        {footer}
       </div>
     </div>
   );

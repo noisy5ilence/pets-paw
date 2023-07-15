@@ -5,21 +5,19 @@ export default function uid() {
   const Cookies = cookies();
   const petLoverId = Cookies.get('petLoverId')?.value;
 
-  if (!petLoverId) {
-    const uid = v4();
+  if (petLoverId) return petLoverId;
 
-    const days = 30;
-    const hours = 24;
-    const minutes = 60;
-    const seconds = 60;
+  const uid = v4();
 
-    Cookies.set('petLoverId', uid, {
-      maxAge: days * hours * minutes * seconds,
-      path: '/',
-    });
+  const days = 30;
+  const hours = 24;
+  const minutes = 60;
+  const seconds = 60;
 
-    return uid;
-  }
+  Cookies.set('petLoverId', uid, {
+    maxAge: days * hours * minutes * seconds,
+    path: '/'
+  });
 
-  return petLoverId;
+  return uid;
 }

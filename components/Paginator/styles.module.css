@@ -1,0 +1,47 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 2px;
+  color: var(--color-18);
+  background: var(--color-17);
+  gap: 10px;
+}
+
+.button path {
+  fill: var(--color-18);
+}
+
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active {
+  background: var(--color-19);
+  color: var(--color-20);
+  cursor: not-allowed;
+}
+
+.button:disabled path,
+.button:disabled:hover path,
+.button:disabled:active path {
+  fill: var(--color-20);
+}

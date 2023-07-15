@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment } from 'react';
+import { cloneElement, Fragment, ReactElement, ReactNode } from 'react';
 import classes from 'classnames';
 
 import useFavorite from '@/app/(site)/voting/useFavorite';
@@ -23,20 +23,35 @@ export default function Container() {
   return (
     <Grid photos={photos} isLoading={isLoading}>
       {(images, hoveredClassName) =>
-        images.map((imageNode, index) => (
-          <Fragment key={photos[index].name}>
-            {imageNode}
-            <button
-              tabIndex={-1}
-              className={classes(hoveredClassName, 'button vector')}
-              onClick={() => remove.mutate({ favoriteId: photos[index].id?.toString() })}
-              disabled={remove.isLoading}
-              title='Remove from favorite'
-            >
-              <FilledHeart />
-            </button>
-          </Fragment>
-        ))
+        images.map((imageNode, index) => {
+          let image: HTMLImageElement;
+          return (
+            <Fragment key={photos[index].name}>
+              {cloneElement(imageNode as ReactElement, {
+                ref: (element: HTMLImageElement) => {
+                  image = element;
+                  element?.classList.add('remove-transition-init');
+                }
+              })}
+              <button
+                tabIndex={-1}
+                className={classes(hoveredClassName, 'button vector')}
+                onClick={() => {
+                  image?.classList.add('remove-transition-emit');
+                  image?.addEventListener(
+                    'transitionend',
+                    () => remove.mutate({ favoriteId: photos[index].id?.toString() }),
+                    { once: true }
+                  );
+                }}
+                disabled={remove.isLoading}
+                title='Remove from favorite'
+              >
+                <FilledHeart />
+              </button>
+            </Fragment>
+          );
+        })
       }
     </Grid>
   );

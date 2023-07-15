@@ -1,8 +1,7 @@
 'use client';
 
-import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import cn from 'classnames';
-import { usePathname, useRouter } from 'next/navigation';
 
 import useFilters from '@/app/(site)/breeds/useFilters';
 import Select from '@/components/Select';
@@ -33,24 +32,12 @@ interface Props {
 }
 
 const Filters: FC<Props> = ({ breeds, onFilter, isFetched }) => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const filters = useFilters({ onFilter, breeds, isFetched });
-
-  const handleChange = ({ target: { value, name } }: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const updatedFilters = { ...filters, [name]: value };
-    const search = Object.entries(updatedFilters)
-      .filter(([_, value]) => value)
-      .map(([key, value]) => `${key}=${value}`)
-      .join('&');
-
-    router.replace(`${pathname}?${search}`);
-  };
+  const [filters, applyFilters] = useFilters({ onFilter, breeds, isFetched });
 
   return (
     <ul className={styles.root}>
       <li className={cn(styles.filter, styles.breed)}>
-        <Select onChange={handleChange} value={filters.breed || ''} name='breed'>
+        <Select onChange={applyFilters} value={filters.breed || ''} name='breed'>
           <option value=''>All breeds</option>
           {breeds.map(({ name, id }) => (
             <option value={id} key={id}>
@@ -60,7 +47,7 @@ const Filters: FC<Props> = ({ breeds, onFilter, isFetched }) => {
         </Select>
       </li>
       <li className={cn(styles.filter, styles.limit)}>
-        <Select onChange={handleChange} value={filters.limit || ''} name='limit'>
+        <Select onChange={applyFilters} value={filters.limit || ''} name='limit'>
           <option value=''>Limit</option>
           {limits.map((limit) => (
             <option value={limit} key={limit}>
@@ -70,7 +57,12 @@ const Filters: FC<Props> = ({ breeds, onFilter, isFetched }) => {
         </Select>
       </li>
       <li className={cn(styles.filter, styles.sorting)}>
-        <Radio options={Object.values(sorting)} value={filters.sorting || ''} name='sorting' onChange={handleChange} />
+        <Radio
+          options={Object.values(sorting)}
+          value={filters.sorting || 'asc'}
+          name='sorting'
+          onChange={applyFilters}
+        />
       </li>
     </ul>
   );

@@ -18,6 +18,15 @@
   animation: disappearTop ease-in-out var(--duration-long) forwards;
 }
 
+.remove-transition-init {
+  transform: scale(1);
+  transition: transform ease-in-out var(--duration-default);
+}
+
+.remove-transition-emit {
+  transform: scale(0);
+}
+
 .pulse {
   animation: pulse ease-in-out 1s;
 }
