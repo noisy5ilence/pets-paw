@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useRef } from 'react';
+import { forwardRef, ReactNode, useEffect, useRef } from 'react';
 import classes from 'classnames';
 import NextImage from 'next/image';
 
@@ -15,20 +15,12 @@ interface Props {
   footer?: ReactNode;
 }
 
-const Grid: FC<Props> = ({ photos, className, isLoading, children, footer }) => {
+const Grid = forwardRef<HTMLDivElement, Props>(({ photos, className, isLoading, children, footer }, ref) => {
   const loadedImages = useRef(0);
 
   useEffect(() => {
     loadedImages.current = 0;
   }, [photos]);
-
-  if (isLoading) {
-    return (
-      <div className={styles.loading}>
-        <Loader />
-      </div>
-    );
-  }
 
   const handleLoadImage = (image: HTMLImageElement) => {
     const photo = image.parentElement;
@@ -48,10 +40,18 @@ const Grid: FC<Props> = ({ photos, className, isLoading, children, footer }) => 
     );
   });
 
+  if (isLoading) {
+    return (
+      <div className={styles.loading}>
+        <Loader />
+      </div>
+    );
+  }
+
   const imageNodes = children?.(images, styles.action) || images;
 
   return (
-    <div className={styles.root} onScroll={() => (loadedImages.current = 0)}>
+    <div className={styles.root} onScroll={() => (loadedImages.current = 0)} ref={ref}>
       <div className={styles.content}>
         <div className={classes(styles.grid, className)}>
           {photos.map(({ name, image }, index) => {
@@ -73,6 +73,7 @@ const Grid: FC<Props> = ({ photos, className, isLoading, children, footer }) => 
       </div>
     </div>
   );
-};
+});
 
+Grid.displayName = 'Grid';
 export default Grid;
