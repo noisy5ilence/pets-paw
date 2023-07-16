@@ -12,8 +12,8 @@ import useFavorites from '../voting/useFavorites';
 
 import FilledHeart from './icons/filled-heart.svg';
 
-export default function Container() {
-  const { data: favorites, isLoading, isFetched } = useFavorites();
+export default function Container({ initialData }: { initialData: Favorite[] }) {
+  const { data: favorites, isLoading, isFetched } = useFavorites({ initialData });
   const { remove } = useFavorite({ instantRemove: true });
 
   const photos = usePhotos({ type: 'favorites', list: favorites || [] });
@@ -21,7 +21,7 @@ export default function Container() {
   if (isFetched && !photos.length) return <NoItem>favorites</NoItem>;
 
   return (
-    <Grid photos={photos} isLoading={isLoading}>
+    <Grid photos={photos}>
       {(images, hoveredClassName) =>
         images.map((imageNode, index) => {
           let image: HTMLImageElement;

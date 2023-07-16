@@ -66,6 +66,7 @@
 
 .photo.stub svg {
   transform: scale(.5);
+  flex-shrink: 0;
 }
 
 .photo img {

@@ -9,7 +9,7 @@ import Providers from '../../components/Providers';
 
 import styles from './layout.module.css';
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
     <Providers>
       <main className={styles.root}>

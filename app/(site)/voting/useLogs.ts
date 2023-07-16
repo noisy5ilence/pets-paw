@@ -6,10 +6,11 @@ import useFavorites from './useFavorites';
 import useVotes from './useVotes';
 
 export default function useLogs({ petId }: { petId?: string }) {
-  const { data: favorites } = useFavorites();
-  const { data: votes } = useVotes();
+  const { data: favorites, isFetched: isFetchedFavorites } = useFavorites();
+  const { data: votes, isFetched: isFetchedVotes } = useVotes();
 
   return {
+    isFetched: isFetchedFavorites && isFetchedVotes,
     favoriteId: useMemo(() => {
       return favorites?.find(({ image_id }) => image_id === petId)?.id;
     }, [favorites, petId]),

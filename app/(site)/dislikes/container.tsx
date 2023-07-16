@@ -6,12 +6,12 @@ import NoItem from '@/components/NoItem';
 
 import useVotes from '../voting/useVotes';
 
-export default function Container() {
-  const { data: votes, isLoading, isFetched } = useVotes();
+export default function Container({ initialData }: { initialData: Vote[] }) {
+  const { data: votes, isFetched } = useVotes({ initialData });
 
   const photos = usePhotos({ type: 'dislikes', list: votes || [] });
 
   if (isFetched && !photos.length) return <NoItem>dislikes</NoItem>;
 
-  return <Grid photos={photos} isLoading={isLoading} />;
+  return <Grid photos={photos} />;
 }

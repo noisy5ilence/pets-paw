@@ -12,12 +12,11 @@ import styles from './styles.module.css';
 interface Props {
   children?: ReactNode;
   photos: GridImage[];
-  isLoading: boolean;
 }
 
-const BreedsGrid = forwardRef<HTMLDivElement, Props>(({ photos, children, isLoading }, ref) => {
+const BreedsGrid = forwardRef<HTMLDivElement, Props>(({ photos, children }, ref) => {
   return (
-    <Grid photos={photos} isLoading={isLoading} footer={children} ref={ref}>
+    <Grid photos={photos} footer={children} ref={ref}>
       {(images, hoveredClassName) =>
         images.map((imageNode, index) => (
           <Fragment key={photos?.[index].id}>

@@ -8,7 +8,7 @@ import useBreeds from './useBreeds';
 import styles from './styles.module.css';
 
 export default function Container() {
-  const { query, data: breeds, isFetched, isLoading } = useBreeds();
+  const { query, data: breeds, isFetched } = useBreeds();
 
   return (
     <>
@@ -19,7 +19,7 @@ export default function Container() {
       {isFetched && !breeds?.length ? (
         <NoItem replace>No breeds have been found</NoItem>
       ) : (
-        <BreedsGrid photos={breeds || []} isLoading={isLoading} />
+        <BreedsGrid photos={breeds || []} />
       )}
     </>
   );

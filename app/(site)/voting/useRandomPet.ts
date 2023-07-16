@@ -3,9 +3,10 @@ import { useQuery } from 'react-query';
 
 import API from './api';
 
-export default function useRandomPet() {
+export default function useRandomPet({ initialData }: { initialData: RandomPet[] }) {
   const [index, setIndex] = useState(0);
   const { data, refetch, isLoading, isRefetching } = useQuery(['randomPets'], API.randomPets, {
+    initialData,
     onSuccess(pets) {
       setPets((state) => state.concat(pets));
     }

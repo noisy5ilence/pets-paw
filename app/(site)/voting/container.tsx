@@ -5,7 +5,6 @@ import type { Metadata } from 'next';
 
 import useRandomPet from '@/app/(site)/voting/useRandomPet';
 import ImageSlider from '@/components/ImageSlider';
-import Loader from '@/components/Loader';
 import { title } from '@/constants/title';
 
 import Activities from './components/Activities';
@@ -18,18 +17,10 @@ export const metadata: Metadata = {
   title: `Voting - ${title}`
 };
 
-export default function Voting() {
-  const { pet, onChangePet, isLoading, isRefetching, pets, index } = useRandomPet();
+export default function Voting({ initialData }: { initialData: RandomPet[] }) {
+  const { pet, onChangePet, isRefetching, pets, index } = useRandomPet({ initialData });
 
-  const { logs, favoriteId } = useLogs({ petId: pet?.id });
-
-  if (isLoading) {
-    return (
-      <div className={styles.voting}>
-        <Loader />
-      </div>
-    );
-  }
+  const { logs, favoriteId, isFetched } = useLogs({ petId: pet?.id });
 
   return (
     <div className={styles.voting}>
@@ -42,9 +33,8 @@ export default function Voting() {
           onChangeCat={onChangePet}
         />
       </div>
-      <div className={styles.logs}>
-        <Logs logs={logs} className={styles.list} />
-      </div>
+
+      <div className={styles.logs}>{isFetched && <Logs logs={logs} className={styles.list} />}</div>
     </div>
   );
 }
