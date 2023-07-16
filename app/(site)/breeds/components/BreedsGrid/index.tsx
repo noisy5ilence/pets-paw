@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, Fragment, ReactNode } from 'react';
+import { FC, forwardRef, Fragment, ReactNode } from 'react';
 import classes from 'classnames';
 import Link from 'next/link';
 
@@ -15,9 +15,9 @@ interface Props {
   isLoading: boolean;
 }
 
-const BreedsGrid: FC<Props> = ({ photos, children, isLoading }) => {
+const BreedsGrid = forwardRef<HTMLDivElement, Props>(({ photos, children, isLoading }, ref) => {
   return (
-    <Grid photos={photos} isLoading={isLoading} footer={children}>
+    <Grid photos={photos} isLoading={isLoading} footer={children} ref={ref}>
       {(images, hoveredClassName) =>
         images.map((imageNode, index) => (
           <Fragment key={photos?.[index].id}>
@@ -34,6 +34,8 @@ const BreedsGrid: FC<Props> = ({ photos, children, isLoading }) => {
       }
     </Grid>
   );
-};
+});
+
+BreedsGrid.displayName = 'BreedsGrid';
 
 export default BreedsGrid;

@@ -3,8 +3,8 @@
 import classes from 'classnames';
 import type { Metadata } from 'next';
 
-import Pet from '@/app/(site)/voting/components/RandomPet';
 import useRandomPet from '@/app/(site)/voting/useRandomPet';
+import ImageSlider from '@/components/ImageSlider';
 import Loader from '@/components/Loader';
 import { title } from '@/constants/title';
 
@@ -33,9 +33,7 @@ export default function Voting() {
 
   return (
     <div className={styles.voting}>
-      <figure className={classes(styles.photo, 'appear-bottom')}>
-        <Pet index={index} pets={pets} />
-      </figure>
+      <ImageSlider images={pets} index={index} />
       <div className={classes(styles.activities)}>
         <Activities
           disabled={isRefetching && index + 1 >= pets.length}

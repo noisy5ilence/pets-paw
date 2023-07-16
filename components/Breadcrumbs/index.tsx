@@ -18,29 +18,31 @@ export const Breadcrumbs: FC = () => {
   const routeKeys = pathname.split('/').filter(Boolean) as Array<keyof typeof routes>;
 
   return (
-    <ul className={styles.root}>
-      <li className={styles.item}>
+    <div className={styles.root}>
+      <div className={styles.item}>
         <button className={cn('button', 'focused-via-keyboard', styles.back)} onClick={() => router.back()}>
           <ArrowIcon />
         </button>
-      </li>
-      {routeKeys.map((key, index, array) => {
-        const isActive = !array[index + 1];
-        const route = routes[key];
+      </div>
+      <ul className={styles.list}>
+        {routeKeys.map((key, index, array) => {
+          const isActive = !array[index + 1];
+          const route = routes[key];
 
-        return (
-          <li key={key} className={styles.item}>
-            <Link
-              className={cn(styles.breadcrumb, 'focused-via-keyboard', styles.link, {
-                [styles.active]: isActive
-              })}
-              href={route?.path || '/'}
-            >
-              {key || route?.title}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
+          return (
+            <li key={key} className={styles.item}>
+              <Link
+                className={cn(styles.breadcrumb, 'focused-via-keyboard', styles.link, {
+                  [styles.active]: isActive
+                })}
+                href={route?.path || '/'}
+              >
+                {key || route?.title}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };

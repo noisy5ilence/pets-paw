@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import NoItem from '@/components/NoItem';
@@ -18,6 +18,7 @@ export default function Container() {
   const [photos, setPhotos] = useState<GridImage[]>([]);
   const { data: breeds, isFetched, isLoading } = useBreeds();
   const { filters, applyFilters } = useQueryFilters();
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const filtersNode =
     mounted &&
@@ -25,6 +26,10 @@ export default function Container() {
       <Filters breeds={breeds || []} onFilter={setPhotos} isFetched={isFetched} />,
       document.getElementById(breadcrumbsPortalId)!
     );
+
+  useEffect(() => {
+    gridRef.current?.scrollTo({ behavior: 'smooth', top: 0 });
+  }, [filters.limit, filters.page]);
 
   if (isFetched && !breeds?.length) {
     return (
@@ -43,7 +48,7 @@ export default function Container() {
   return (
     <>
       {filtersNode}
-      <BreedsGrid photos={photos} isLoading={isLoading}>
+      <BreedsGrid photos={photos} isLoading={isLoading} ref={gridRef}>
         {isShowPaginator && (
           <Paginator
             name='page'

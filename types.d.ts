@@ -67,6 +67,10 @@ interface Image {
   url: string;
 }
 
+interface ImageWithBreeds extends Image {
+  breeds: Breed[];
+}
+
 interface GridImage {
   image: Image | undefined;
   name: string;

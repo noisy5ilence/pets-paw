@@ -44,6 +44,19 @@ main {
   flex-direction: column;
 }
 
+.hidden-scroll-bar {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow: -moz-scrollbars-none;
+}
+
+.hidden-scroll-bar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 @media screen and (max-width: 1150px) {
   main {
     max-width: 680px;
