@@ -13,10 +13,10 @@ import Filters from './components/Filters';
 import useBreeds from './useBreeds';
 import { useQueryFilters } from './useFilters';
 
-export default function Container() {
+export default function Container({ initialData }: { initialData: Breed[] }) {
   const mounted = useMounted();
   const [photos, setPhotos] = useState<GridImage[]>([]);
-  const { data: breeds, isFetched, isLoading } = useBreeds();
+  const { data: breeds, isFetched } = useBreeds({ initialData });
   const { filters, applyFilters } = useQueryFilters();
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -48,7 +48,7 @@ export default function Container() {
   return (
     <>
       {filtersNode}
-      <BreedsGrid photos={photos} isLoading={isLoading} ref={gridRef}>
+      <BreedsGrid photos={photos} ref={gridRef}>
         {isShowPaginator && (
           <Paginator
             name='page'

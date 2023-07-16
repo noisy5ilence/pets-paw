@@ -2,11 +2,21 @@ import axios, { AxiosResponse } from 'axios';
 
 const client = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_PETS_PAW_BASE}/api`,
+  withCredentials: true
 });
 
-const handleResponse = (response: AxiosResponse): AxiosResponse['data'] =>
-  response.data;
+const handleResponse = (response: AxiosResponse): AxiosResponse['data'] => response.data;
 
 client.interceptors.response.use(handleResponse);
+
+client.interceptors.request.use(async (config) => {
+  if (typeof window !== 'undefined') return config;
+
+  const { cookies } = await import('next/headers');
+
+  config.headers.set('Cookie', cookies().toString());
+
+  return config;
+});
 
 export default client;

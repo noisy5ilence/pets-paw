@@ -45,6 +45,7 @@ body[data-theme="light"] {
   --color-popup-background: #f8f8f7;
   --color-border: #ffffff;
   --color-list-item-background: #f8f8f7;
+  --panel-backgroung: rgba(255, 255, 255, 1);
   transition: background linear var(--duration-default),
     color linear var(--duration-default);
 }
@@ -61,6 +62,7 @@ body[data-theme="dark"] {
   --color-popup-background: #282828;
   --color-border: #282828;
   --color-list-item-background: rgba(255, 255, 255, 0.05);
+  --panel-backgroung: rgba(40, 40, 40, 1);
   transition: background linear var(--duration-default),
     color linear var(--duration-default);
 }

@@ -1,5 +1,3 @@
-import type { Metadata } from 'next';
-
 import API from '@/app/(site)/breeds/api';
 import { title } from '@/constants/title';
 
@@ -31,5 +29,5 @@ export async function generateMetadata({ params: { breed: breedId } }: Props) {
 export default async function Breed({ params: { breed: breedId } }: Props) {
   const imagesWithBreeds = await API.breed({ breed: breedId! });
 
-  return <Container imagesWithBreeds={imagesWithBreeds} />;
+  return <Container initialData={imagesWithBreeds} breedId={breedId!} />;
 }
