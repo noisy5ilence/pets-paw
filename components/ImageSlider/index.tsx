@@ -39,7 +39,7 @@ const ImageSlider: FC<Props> = ({ images, index }) => {
 
     clearTimeout(changeSlideTimeout.current!);
 
-    changeSlideTimeout.current = setTimeout(() => setIndex(index), 100);
+    changeSlideTimeout.current = setTimeout(() => setIndex(index), 30);
   };
 
   useEffect(() => {
@@ -56,20 +56,22 @@ const ImageSlider: FC<Props> = ({ images, index }) => {
         ref={sliderRef}
       >
         <ul className={styles.list}>
-          {images?.map((image, index, array) => (
-            <li
-              key={image.id}
-              className={classes(styles.item, styles.loading)}
-              ref={(element) => (slidesRefs.current[index] = element!)}
-            >
-              <img
-                src={image.url}
-                ref={(image) => image?.complete && handleLoadImage(image)}
-                onLoad={(event) => handleLoadImage(event.target as HTMLImageElement)}
-                alt='Pet'
-              />
-            </li>
-          ))}
+          {images?.map((image, index) => {
+            return (
+              <li
+                key={image.id}
+                className={classes(styles.item, styles.loading)}
+                ref={(element) => (slidesRefs.current[index] = element!)}
+              >
+                <img
+                  src={image.url}
+                  ref={(image) => image?.complete && handleLoadImage(image)}
+                  onLoad={(event) => handleLoadImage(event.target as HTMLImageElement)}
+                  alt='Pet'
+                />
+              </li>
+            );
+          })}
         </ul>
       </figure>
       {useInternalControl && (

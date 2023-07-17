@@ -1,7 +1,8 @@
 'use client';
 
 import { ReactNode, useState } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
 
 const Providers = ({ children }: { children: ReactNode }) => {
   const [queryClient] = useState(
@@ -11,13 +12,15 @@ const Providers = ({ children }: { children: ReactNode }) => {
           queries: {
             refetchOnWindowFocus: false,
             keepPreviousData: true,
-            staleTime: Number.POSITIVE_INFINITY,
-          },
-        },
+            staleTime: Number.POSITIVE_INFINITY
+          }
+        }
       })
   );
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryStreamedHydration queryClient={queryClient}>{children}</ReactQueryStreamedHydration>
+    </QueryClientProvider>
   );
 };
 

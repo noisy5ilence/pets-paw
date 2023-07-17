@@ -7,17 +7,18 @@ import NoItem from '@/components/NoItem';
 import Paginator from '@/components/Paginator';
 import breadcrumbsPortalId from '@/constants/breadcrumbsPortalId';
 import useMounted from '@/hooks/useMounted';
+import useQueryFilters from '@/hooks/useQueryFilters';
 
 import BreedsGrid from './components/BreedsGrid';
 import Filters from './components/Filters';
 import useBreeds from './useBreeds';
-import { useQueryFilters } from './useFilters';
+import { QueryFilters } from './useFilters';
 
 export default function Container({ initialData }: { initialData: Breed[] }) {
   const mounted = useMounted();
-  const [photos, setPhotos] = useState<GridImage[]>([]);
-  const { data: breeds, isFetched } = useBreeds({ initialData });
-  const { filters, applyFilters } = useQueryFilters();
+  const [photos, setPhotos] = useState<Image[]>([]);
+  const { data: breeds, isFetched } = useBreeds({ suspense: true });
+  const { filters, applyFilters } = useQueryFilters<QueryFilters>();
   const gridRef = useRef<HTMLDivElement>(null);
 
   const filtersNode =

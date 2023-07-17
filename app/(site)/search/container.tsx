@@ -1,5 +1,7 @@
 'use client';
 
+import { useMemo } from 'react';
+
 import BreedsGrid from '@/app/(site)/breeds/components/BreedsGrid';
 import NoItem from '@/components/NoItem';
 
@@ -10,6 +12,10 @@ import styles from './styles.module.css';
 export default function Container() {
   const { query, data: breeds, isFetched } = useBreeds();
 
+  const photos = useMemo(() => {
+    return breeds?.map(({ image, name, id }) => ({ ...image, id, name })) || [];
+  }, [breeds]);
+
   return (
     <>
       <div className={styles.root}>
@@ -19,7 +25,7 @@ export default function Container() {
       {isFetched && !breeds?.length ? (
         <NoItem replace>No breeds have been found</NoItem>
       ) : (
-        <BreedsGrid photos={breeds || []} />
+        <BreedsGrid photos={photos} />
       )}
     </>
   );

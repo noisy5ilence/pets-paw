@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import API from './api';
 
-export default function useRandomPet({ initialData }: { initialData: RandomPet[] }) {
+const UPDATE_RATE = 5;
+
+export default function useRandomPet() {
   const [index, setIndex] = useState(0);
-  const { data, refetch, isLoading, isRefetching } = useQuery(['randomPets'], API.randomPets, {
-    initialData,
-    onSuccess(pets) {
-      setPets((state) => state.concat(pets));
+
+  const {
+    data: pets,
+    refetch,
+    isLoading,
+    isRefetching
+  } = useQuery<RandomPet[]>(['randomPets'], API.randomPets, {
+    suspense: true,
+    structuralSharing(current, next) {
+      return (current || []).concat(next);
     }
   });
 
@@ -18,10 +26,8 @@ export default function useRandomPet({ initialData }: { initialData: RandomPet[]
     };
   }, [refetch]);
 
-  const [pets, setPets] = useState<RandomPet[]>(data || []);
-
   const handleChangePet = () => {
-    if (index >= Math.abs(pets!.length / 2)) {
+    if (index && index % UPDATE_RATE === 0) {
       refetch();
     }
 

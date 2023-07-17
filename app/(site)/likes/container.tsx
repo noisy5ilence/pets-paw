@@ -6,8 +6,8 @@ import NoItem from '@/components/NoItem';
 
 import useVotes from '../voting/useVotes';
 
-export default function Container({ initialData }: { initialData: Vote[] }) {
-  const { data: votes, isFetched } = useVotes({ initialData });
+export default function Container() {
+  const { data: votes, isFetched } = useVotes({ suspense: true });
 
   const photos = usePhotos({ type: 'likes', list: votes || [] });
 

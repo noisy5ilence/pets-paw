@@ -5,7 +5,7 @@ import server from '@/network/server';
 export async function GET() {
   const data: RandomPet[] = await server.get('/images/search', {
     params: {
-      limit: 20
+      limit: 10
     }
   });
 

@@ -7,8 +7,8 @@ import useBreed from './useBreed';
 
 import styles from './styles.module.css';
 
-export default function Container({ initialData, breedId }: { initialData: ImageWithBreeds[]; breedId: string }) {
-  const { data: imagesWithBreeds } = useBreed({ initialData, breed: breedId });
+export default function Container({ breedId }: { breedId: string }) {
+  const { data: imagesWithBreeds } = useBreed({ suspense: true, breed: breedId });
 
   if (!imagesWithBreeds?.length) return <NoItem replace>No breed was found</NoItem>;
 

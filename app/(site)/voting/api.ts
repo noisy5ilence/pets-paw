@@ -8,7 +8,7 @@ const API = {
     list(): Promise<Favorite[]> {
       return client.get('/favorites');
     },
-    add({ petId }: { petId: string }): Promise<SuccessResponse> {
+    add({ petId }: { petId: string | number }): Promise<SuccessResponse> {
       return client.post('/favorites', { image_id: petId });
     },
     delete({ favoriteId }: { favoriteId: string }) {

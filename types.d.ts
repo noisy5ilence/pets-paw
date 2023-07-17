@@ -61,10 +61,27 @@ interface Breed {
 }
 
 interface Image {
-  id: string;
+  id: string | number;
   width: number;
   height: number;
   url: string;
+  name?: string;
+}
+
+interface Paginator {
+  total: number;
+  page: number;
+  limit: number;
+}
+
+interface ResponseWithHeaders<D> {
+  data: D;
+  headers: Record<string, string>;
+}
+
+interface ResponseWithPaginator<D> {
+  paginator: Paginator;
+  data: D;
 }
 
 interface ImageWithBreeds extends Image {
@@ -84,7 +101,7 @@ interface Weight {
 
 interface RandomPet {
   breeds: Breed[];
-  id: string;
+  id: string | number;
   url: string;
   width: number;
   height: number;

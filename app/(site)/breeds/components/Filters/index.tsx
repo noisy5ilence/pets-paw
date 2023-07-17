@@ -5,6 +5,7 @@ import cn from 'classnames';
 
 import useFilters from '@/app/(site)/breeds/useFilters';
 import Select from '@/components/Select';
+import limits from '@/constants/limits';
 
 import Radio from './components/Radio';
 import ASCIcon from './icons/asc.svg';
@@ -12,7 +13,7 @@ import DESCIcon from './icons/desc.svg';
 
 import styles from './styles.module.css';
 
-const sorting = {
+const order = {
   asc: {
     value: 'asc',
     icon: <ASCIcon />
@@ -23,11 +24,9 @@ const sorting = {
   }
 };
 
-const limits = ['5', '10', '15', '20'];
-
 interface Props {
   breeds: Breed[];
-  onFilter: Dispatch<SetStateAction<GridImage[]>>;
+  onFilter: Dispatch<SetStateAction<Image[]>>;
   isFetched: boolean;
 }
 
@@ -57,12 +56,7 @@ const Filters: FC<Props> = ({ breeds, onFilter, isFetched }) => {
         </Select>
       </li>
       <li className={cn(styles.filter, styles.sorting)}>
-        <Radio
-          options={Object.values(sorting)}
-          value={filters.sorting || 'asc'}
-          name='sorting'
-          onChange={applyFilters}
-        />
+        <Radio options={Object.values(order)} value={filters.order || 'asc'} name='order' onChange={applyFilters} />
       </li>
     </ul>
   );

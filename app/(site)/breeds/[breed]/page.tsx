@@ -27,7 +27,5 @@ export async function generateMetadata({ params: { breed: breedId } }: Props) {
 }
 
 export default async function Breed({ params: { breed: breedId } }: Props) {
-  const imagesWithBreeds = await API.breed({ breed: breedId! });
-
-  return <Container initialData={imagesWithBreeds} breedId={breedId!} />;
+  return <Container breedId={breedId!} />;
 }

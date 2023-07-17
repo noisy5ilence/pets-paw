@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 interface Props {
   children?: ReactNode;
-  photos: GridImage[];
+  photos: Image[];
 }
 
 const BreedsGrid = forwardRef<HTMLDivElement, Props>(({ photos, children }, ref) => {

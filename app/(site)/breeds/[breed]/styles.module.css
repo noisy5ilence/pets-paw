@@ -67,6 +67,7 @@
 .columns:after {
   content: '';
   height: 20px;
+  width: 100%;
 }
 
 .column {

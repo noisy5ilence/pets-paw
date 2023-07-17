@@ -10,7 +10,7 @@ const usePhotos = ({ type, list }: { type: 'likes' | 'dislikes' | 'favorites'; l
         ?.sort((a, b) => {
           return +new Date(b.created_at) - +new Date(a.created_at);
         })
-        ?.map(({ image, image_id, id }) => ({ name: image_id, image, id })) || []
+        ?.map(({ image, id }) => ({ ...image, id })) || []
     );
   }, [list, type]);
 };

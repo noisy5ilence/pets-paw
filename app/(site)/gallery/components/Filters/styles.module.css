@@ -1,0 +1,107 @@
+.root {
+  background: var(--color-list-item-background);
+  padding: 10px 20px 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  border-radius: 20px;
+}
+
+.column {
+  flex-basis: 290px;
+  flex-grow: 1;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+}
+
+.selectRoot {
+  width: 100%;
+}
+
+.selectRoot .select {
+  background: var(--color-primary-background);
+  color: var(--color-primary);
+  flex-grow: 1;
+}
+
+.label {
+  color: var(--color-placeholder);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 18px;
+  margin-left: 10px;
+}
+
+.value {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.update {
+  width: 40px;
+  background: var(--color-primary-background);
+}
+
+.update:active {
+  background: var(--color-18);
+}
+
+.update:active path {
+  fill: white;
+}
+
+.update:disabled,
+.update:disabled:hover,
+.update:disabled:active {
+  background: var(--color-19);
+  color: var(--color-placeholder);
+  cursor: progress;
+}
+
+.update:disabled path,
+.update:disabled:hover path,
+.update:disabled:active path {
+  fill: var(--color-placeholder);
+}
+
+@media (hover: hover) {
+  .update:hover {
+    background: var(--color-18);
+  }
+  .update:hover path {
+    fill: white;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .root {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+  .value {
+    flex-wrap: wrap;
+  }
+  .update {
+    flex-grow: 1;
+    width: 100%;
+  }
+  .column {
+    flex-basis: auto;
+  }
+}

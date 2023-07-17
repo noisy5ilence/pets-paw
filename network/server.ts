@@ -5,7 +5,11 @@ export const server = axios.create({
   baseURL: 'https://api.thecatapi.com/v1'
 });
 
-const handleResponse = (response: AxiosResponse): AxiosResponse['data'] => response.data;
+const handleResponse = (response: AxiosResponse): AxiosResponse['data'] => {
+  if (!response.config?.params?.withHeaders) return response.data;
+
+  return { data: response.data, headers: response.headers };
+};
 
 server.interceptors.response.use(handleResponse);
 

@@ -101,7 +101,25 @@
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background: var(--color-1);
+  background: var(--hover-button);
+}
+
+.photo .action:disabled {
+  cursor: progress;
+}
+
+.photo .action:disabled,
+.photo .action:disabled:hover,
+.photo .action:disabled:active {
+  background: var(--color-19);
+  color: var(--color-placeholder);
+  cursor: progress;
+}
+
+.photo .action:disabled path,
+.photo .action:disabled:hover path,
+.photo .action:disabled:active path {
+  fill: var(--color-placeholder);
 }
 
 .photo:after {

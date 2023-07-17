@@ -1,6 +1,6 @@
 'use client';
 
-import { cloneElement, Fragment, ReactElement, ReactNode } from 'react';
+import { cloneElement, Fragment, ReactElement } from 'react';
 import classes from 'classnames';
 
 import useFavorite from '@/app/(site)/voting/useFavorite';
@@ -12,8 +12,8 @@ import useFavorites from '../voting/useFavorites';
 
 import FilledHeart from './icons/filled-heart.svg';
 
-export default function Container({ initialData }: { initialData: Favorite[] }) {
-  const { data: favorites, isLoading, isFetched } = useFavorites({ initialData });
+export default function Container() {
+  const { data: favorites, isFetched } = useFavorites({ suspense: true });
   const { remove } = useFavorite({ instantRemove: true });
 
   const photos = usePhotos({ type: 'favorites', list: favorites || [] });

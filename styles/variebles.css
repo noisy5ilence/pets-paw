@@ -41,11 +41,13 @@ body[data-theme="light"] {
   --color-primary: #1d1d1d;
   --color-default-button: #ffffff;
   --color-icon-background: #fbe0dc;
-  --color-alt-icon-background: #fbe0dc;
+  --color-alt-icon-background: #FBE0DC;
   --color-popup-background: #f8f8f7;
   --color-border: #ffffff;
   --color-list-item-background: #f8f8f7;
   --panel-backgroung: rgba(255, 255, 255, 1);
+  --upload-button: #FBE0DC;
+  --hover-button: #ffffff;
   transition: background linear var(--duration-default),
     color linear var(--duration-default);
 }
@@ -58,11 +60,13 @@ body[data-theme="dark"] {
   --color-primary-background: #1d1d1d;
   --color-default-button: rgba(255, 255, 255, 0.1);
   --color-icon-background: rgba(255, 255, 255, 0.1);
-  --color-alt-icon-background: rgba(255, 134, 142, 0.2);
+  --color-alt-icon-background: rgba(255, 134, 142, 0.20);
   --color-popup-background: #282828;
   --color-border: #282828;
   --color-list-item-background: rgba(255, 255, 255, 0.05);
   --panel-backgroung: rgba(40, 40, 40, 1);
+  --upload-button: #ff868e;
+  --hover-button: #282828;
   transition: background linear var(--duration-default),
     color linear var(--duration-default);
 }

@@ -1,43 +1,20 @@
-import { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
-type QueryFilters = Partial<{
+import useQueryFilters, { ApplyFilters } from '@/hooks/useQueryFilters';
+
+export type QueryFilters = Partial<{
   page: string;
   limit: string;
   breed: string;
-  sorting: 'asc' | 'desc';
+  order: 'asc' | 'desc';
 }>;
 
-type ApplyFilters = ({ target: { value, name } }: { target: { value: string; name: string } }) => void;
+const mapper = (filters: QueryFilters, name: string, value: string) => ({
+  ...filters,
+  page: name === 'limit' ? '' : filters.page,
+  [name]: value
+});
 
-export const useQueryFilters = () => {
-  const pathname = usePathname();
-  const router = useRouter();
-  const params = useSearchParams();
-  const filters: QueryFilters = Object.fromEntries(params.entries());
-
-  const search = params.toString();
-
-  const applyFilters = useCallback(
-    ({ target: { value, name } }: { target: { value: string; name: string } }) => {
-      const updatedFilters = { ...filters, page: name === 'limit' ? '' : filters.page, [name]: value };
-      const search = Object.entries(updatedFilters)
-        .filter(([_, value]) => (value === '0' ? false : value))
-        .map(([key, value]) => `${key}=${value}`)
-        .join('&');
-
-      router.replace(`${pathname}?${search}`);
-    },
-    [router, filters, pathname]
-  );
-
-  return {
-    params,
-    filters,
-    search,
-    applyFilters
-  };
-};
 const useFilters = ({
   breeds,
   onFilter,
@@ -45,9 +22,9 @@ const useFilters = ({
 }: {
   isFetched: boolean;
   breeds: Breed[];
-  onFilter: Dispatch<SetStateAction<GridImage[]>>;
+  onFilter: Dispatch<SetStateAction<Image[]>>;
 }): [QueryFilters, ApplyFilters] => {
-  const { search, filters, applyFilters } = useQueryFilters();
+  const { search, filters, applyFilters } = useQueryFilters<QueryFilters>({ mapper });
 
   useEffect(() => {
     if (!isFetched) return;
@@ -58,14 +35,15 @@ const useFilters = ({
     onFilter(() => {
       return [...breeds]
         .sort((a, b) => {
-          return filters.sorting === 'asc'
+          return filters.order === 'asc'
             ? a.name.localeCompare(b.name)
-            : filters.sorting === 'desc'
+            : filters.order === 'desc'
             ? b.name.localeCompare(a.name)
             : 0;
         })
         .filter(({ id }) => (filters.breed !== undefined ? filters.breed == id : true))
-        .slice(page * limit, page * limit + limit);
+        .slice(page * limit, page * limit + limit)
+        .map(({ image, name, id }) => ({ ...image, id, name }));
     });
   }, [search, isFetched, onFilter]);
 

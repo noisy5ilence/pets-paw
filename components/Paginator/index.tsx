@@ -11,17 +11,18 @@ interface Props {
   perPage?: number;
   page: number;
   name: string;
+  disabled?: boolean;
   onChange: ({ target: { value, name } }: { target: { value: string; name: string } }) => void;
 }
 
-const Paginator: FC<Props> = ({ total, page, perPage = total, name, onChange }) => {
+const Paginator: FC<Props> = ({ total, page, perPage = total, name, onChange, disabled }) => {
   const totalPages = Math.ceil(total / perPage);
   if (total <= perPage) return null;
   return (
     <div className={styles.root}>
       <button
         className={classes('button', styles.button)}
-        disabled={page == 0}
+        disabled={page == 0 || disabled}
         onClick={() => {
           const nextPage = page - 1;
           return onChange({ target: { value: `${nextPage < 0 ? 0 : nextPage}`, name } });
@@ -34,7 +35,7 @@ const Paginator: FC<Props> = ({ total, page, perPage = total, name, onChange }) 
       </button>
       <button
         className={classes('button', styles.button)}
-        disabled={page == totalPages}
+        disabled={page == totalPages || disabled}
         onClick={() => {
           const nextPage = +page + 1;
           return onChange({ target: { value: `${nextPage > totalPages ? totalPages : nextPage}`, name } });

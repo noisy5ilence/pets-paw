@@ -1,15 +1,11 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import API from '@/app/(site)/breeds/api';
 
-const useBreeds = ({ initialData }: { initialData?: Breed[] } = { initialData: undefined }) => {
-  const query = useQuery(['breeds'], API.breeds, {
-    initialData
+const useBreeds = ({ suspense }: { suspense?: boolean } = { suspense: false }) => {
+  return useQuery(['breeds'], API.breeds, {
+    suspense: true
   });
-  return {
-    ...query,
-    isFetched: Boolean(query?.data) || query.isFetched
-  };
 };
 
 export default useBreeds;
