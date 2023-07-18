@@ -1,13 +1,15 @@
 import client from '@/network';
 
 const API = {
-  breeds(): Promise<Breed[]> {
+  breeds(): Promise<BreedWithImage[]> {
     return client.get('/breeds');
   },
   breed({ breed }: { breed: string }): Promise<ImageWithBreeds[]> {
-    return client.get('/breed', {
+    return client.get('/images', {
       params: {
-        breed
+        limit: 5,
+        breed_ids: breed,
+        has_breeds: 1
       }
     });
   }

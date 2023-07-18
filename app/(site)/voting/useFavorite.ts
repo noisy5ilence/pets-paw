@@ -1,25 +1,25 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import useQueryStateUpdater from '@/hooks/useQueryStateUpdater';
 
 import API from './api';
 import { KEY } from './useFavorites';
 
-export default function useFavorite({ pet, instantRemove }: { pet?: RandomPet; instantRemove?: boolean } = {}) {
+export default function useFavorite({ instantRemove }: { instantRemove?: boolean } = {}) {
   const setFavorites = useQueryStateUpdater<Favorite[]>({ key: KEY });
-  const queryClient = useQueryClient();
 
   const add = useMutation(
-    (params: { pet?: Omit<RandomPet, 'breeds'> }) => API.favorites.add({ petId: (pet?.id || params.pet?.id)! }),
+    ({ image }: { image: Omit<ImageWithBreeds, 'breeds'> }) => {
+      return API.favorites.add({ image_id: image.id });
+    },
     {
-      onSuccess({ id }, params) {
-        if (!queryClient.getQueryState([KEY])?.fetchStatus) return queryClient.refetchQueries([KEY]);
+      onSuccess({ id }, { image }) {
         setFavorites((state) => {
           return [
             {
               id,
-              image_id: (pet || params?.pet)?.id,
-              image: { id: (pet || params?.pet)?.id, url: (pet || params?.pet)?.url },
+              image_id: image.id,
+              image: { id: image.id, url: image.url },
               created_at: new Date()
             } as Favorite,
             ...(state || [])
@@ -29,14 +29,14 @@ export default function useFavorite({ pet, instantRemove }: { pet?: RandomPet; i
     }
   );
 
-  const handleRemove = (favoriteId: string) => {
+  const handleRemove = (favoriteId: number) => {
     setFavorites((state) => {
-      return state?.filter(({ id }) => id?.toString() != favoriteId) || [];
+      return state?.filter(({ id }) => id != favoriteId) || [];
     });
   };
 
   const remove = useMutation(
-    ({ favoriteId }: { favoriteId: string }) => {
+    ({ favoriteId }: { favoriteId: number }) => {
       instantRemove && handleRemove(favoriteId);
       return API.favorites.delete({ favoriteId });
     },

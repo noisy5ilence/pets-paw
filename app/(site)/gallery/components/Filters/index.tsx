@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 export type QueryFilters = Partial<{
   page: string;
   limit: string;
-  type: 'jpg,png' | 'gif';
+  mime_types: 'jpg,png' | 'gif';
   breed: string;
   order: 'asc' | 'desc' | 'rand';
 }>;
@@ -54,8 +54,8 @@ const Filters: FC<Props> = ({ onFilter, isLoading }) => {
               name='order'
             >
               <option value=''>Random</option>
-              <option value='asc'>Asc</option>
-              <option value='desc'>Desc</option>
+              <option value='asc'>Ascending</option>
+              <option value='desc'>Descending</option>
             </Select>
           </div>
         </div>
@@ -88,8 +88,8 @@ const Filters: FC<Props> = ({ onFilter, isLoading }) => {
               className={styles.select}
               rootClassName={styles.selectRoot}
               onChange={applyFilters}
-              value={filters.type || ''}
-              name='type'
+              value={filters.mime_types || ''}
+              name='mime_types'
             >
               <option value=''>All</option>
               <option value='jpg,png'>Static</option>

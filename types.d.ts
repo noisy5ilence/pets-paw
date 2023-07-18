@@ -18,15 +18,17 @@ interface Log {
   sub_id: string;
   created_at: Date;
   image_id: string;
-  image: Image;
-  value: 1 | 0 | -1;
+  image: Omit<Image, 'width' | 'height'>;
+  value?: 1 | 0;
 }
 
 interface Breed {
   weight: Weight;
   id: string;
   name: string;
-  vetstreet_url: string;
+  cfa_url?: string;
+  vetstreet_url?: string;
+  vcahospitals_url?: string;
   temperament: string;
   origin: string;
   country_codes: string;
@@ -34,7 +36,8 @@ interface Breed {
   description: string;
   life_span: string;
   indoor: number;
-  alt_names: string;
+  lap?: number;
+  alt_names?: string;
   adaptability: number;
   affection_level: number;
   child_friendly: number;
@@ -54,18 +57,26 @@ interface Breed {
   rex: number;
   suppressed_tail: number;
   short_legs: number;
-  wikipedia_url: string;
+  wikipedia_url?: string;
   hypoallergenic: number;
-  reference_image_id: string;
-  image: Image;
+  reference_image_id?: string;
+  cat_friendly?: number;
+  bidability?: number;
+}
+
+interface BreedWithImage extends Breed {
+  image?: Image;
 }
 
 interface Image {
-  id: string | number;
+  id: string;
   width: number;
   height: number;
   url: string;
-  name?: string;
+}
+
+interface ImageWithName extends Image {
+  name: string;
 }
 
 interface Paginator {
@@ -88,21 +99,7 @@ interface ImageWithBreeds extends Image {
   breeds: Breed[];
 }
 
-interface GridImage {
-  image: Image | undefined;
-  name: string;
-  id: number | string;
-}
-
 interface Weight {
   imperial: string;
   metric: string;
-}
-
-interface RandomPet {
-  breeds: Breed[];
-  id: string | number;
-  url: string;
-  width: number;
-  height: number;
 }

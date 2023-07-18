@@ -28,8 +28,9 @@ const Logs: FC<Props> = ({ logs, className }) => {
           const hours = createdAt.getHours();
           const minutes = createdAt.getMinutes();
 
-          const isLike = value > 0;
-          const isDislike = value < 0;
+          const isFavorite = value === undefined;
+          const isLike = !isFavorite && value > 0;
+          const isDislike = !isFavorite && value < 0;
 
           return (
             <li key={id || image_id} className={classes(styles.item, 'appear-top')}>

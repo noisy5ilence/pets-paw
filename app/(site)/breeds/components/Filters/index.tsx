@@ -1,11 +1,12 @@
 'use client';
 
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
 import cn from 'classnames';
 
-import useFilters from '@/app/(site)/breeds/useFilters';
 import Select from '@/components/Select';
 import limits from '@/constants/limits';
+
+import useFilters, { Props } from '../../useFilters';
 
 import Radio from './components/Radio';
 import ASCIcon from './icons/asc.svg';
@@ -23,12 +24,6 @@ const order = {
     icon: <DESCIcon />
   }
 };
-
-interface Props {
-  breeds: Breed[];
-  onFilter: Dispatch<SetStateAction<Image[]>>;
-  isFetched: boolean;
-}
 
 const Filters: FC<Props> = ({ breeds, onFilter, isFetched }) => {
   const [filters, applyFilters] = useFilters({ onFilter, breeds, isFetched });

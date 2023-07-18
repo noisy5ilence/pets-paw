@@ -15,57 +15,45 @@ import UnFavIcon from './icons/un-fav.svg';
 import styles from './styles.module.css';
 
 interface Props {
-  pet?: RandomPet;
+  image: ImageWithBreeds;
   favoriteId?: number;
   disabled?: boolean;
-  onChangeCat: () => void;
+  onChangeImage: () => void;
 }
 
-const Activities: FC<Props> = ({ pet, favoriteId, disabled, onChangeCat }) => {
-  const vote = useVote({ pet });
-  const { add, remove } = useFavorite({ pet });
+const Activities: FC<Props> = ({ image, favoriteId, disabled, onChangeImage }) => {
+  const vote = useVote();
+  const { add, remove } = useFavorite();
   const updateLogs = useSetAtom(updateLogsAtom);
 
   const isFav = Boolean(favoriteId);
 
+  const handleVote = (value: 1 | -1) => {
+    updateLogs({ type: value > 0 ? 'likes' : 'dislikes' });
+    vote.mutate({ image, vote: value });
+    onChangeImage();
+  };
+
+  const handleFav = () => {
+    if (isFav) return remove.mutate({ favoriteId: favoriteId! });
+    updateLogs({ type: 'favorites' });
+    add.mutate({ image });
+  };
+
   return (
     <ul className={styles.list}>
       <li className={cn(styles.item, styles.like)} title='Like'>
-        <button
-          className='button'
-          onClick={() => {
-            onChangeCat();
-            updateLogs({ type: 'likes' });
-            vote.mutateAsync({ vote: 1 });
-          }}
-          disabled={disabled}
-        >
+        <button className='button' onClick={() => handleVote(1)} disabled={disabled}>
           <LikeIcon />
         </button>
       </li>
       <li className={cn(styles.item, styles.fav)} title={isFav ? 'Remove from favorite' : 'Add to favorite'}>
-        <button
-          className='button'
-          onClick={() => {
-            if (isFav) return remove.mutate({ favoriteId: favoriteId!.toString() });
-            updateLogs({ type: 'favorites' });
-            add.mutate();
-          }}
-          disabled={disabled || remove.isLoading || add.isLoading}
-        >
+        <button className='button' onClick={handleFav} disabled={disabled || remove.isLoading || add.isLoading}>
           {isFav ? <UnFavIcon /> : <FavIcon />}
         </button>
       </li>
       <li className={cn(styles.item, styles.dislike)} title='Dislike'>
-        <button
-          className='button'
-          onClick={() => {
-            onChangeCat();
-            updateLogs({ type: 'dislikes' });
-            vote.mutateAsync({ vote: -1 });
-          }}
-          disabled={disabled}
-        >
+        <button className='button' onClick={() => handleVote(-1)} disabled={disabled}>
           <DislikeIcon />
         </button>
       </li>

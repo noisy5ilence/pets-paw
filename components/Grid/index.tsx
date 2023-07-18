@@ -1,38 +1,39 @@
 import { forwardRef, ReactNode } from 'react';
 import classes from 'classnames';
 import NextImage from 'next/image';
+import { v4 as uniqueId } from 'uuid';
 
 import ImageStub from '@/public/photo-stub.svg';
 
 import styles from './styles.module.css';
 
 interface Props {
-  photos?: Image[];
+  images?: Omit<Image, 'width' | 'height'>[];
   className?: string;
   children?: (children: ReactNode[], hoveredClassName: string) => ReactNode[];
   footer?: ReactNode;
 }
 
-const Grid = forwardRef<HTMLDivElement, Props>(({ photos, className, children, footer }, ref) => {
+const Grid = forwardRef<HTMLDivElement, Props>(({ images, className, children, footer }, ref) => {
   const handleLoadImage = (image: HTMLImageElement) => {
     image?.parentElement?.classList.add(styles.loaded);
   };
 
-  const images = photos?.map(({ id, url, name }) => {
-    return !url ? (
-      <ImageStub />
+  const frames = images?.map((image) => {
+    return !image?.url ? (
+      <ImageStub key={uniqueId()} />
     ) : (
-      <NextImage key={id} onLoadingComplete={handleLoadImage} src={url} layout='fill' alt={name || 'Pet'} />
+      <NextImage key={image.id} onLoadingComplete={handleLoadImage} src={image.url} layout='fill' alt={'Pet'} />
     );
   });
 
-  const imageNodes = children?.(images || [], styles.action) || images;
+  const imageNodes = children?.(frames || [], styles.action) || frames;
 
   return (
     <div className={styles.root} ref={ref}>
       <div className={styles.content}>
         <div className={classes(styles.grid, className)}>
-          {photos?.map(({ id, url }, index) => {
+          {images?.map(({ id, url }, index) => {
             return (
               <figure
                 key={id}

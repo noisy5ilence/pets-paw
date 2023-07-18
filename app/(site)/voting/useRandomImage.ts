@@ -5,43 +5,40 @@ import API from './api';
 
 const UPDATE_RATE = 5;
 
-export default function useRandomPet() {
-  const [index, setIndex] = useState(0);
+let preservedIndex = 0;
+
+export default function useRandomImage() {
+  const [index, setIndex] = useState(preservedIndex);
 
   const {
-    data: pets,
+    data: images,
     refetch,
     isLoading,
     isRefetching
-  } = useQuery<RandomPet[]>(['randomPets'], API.randomPets, {
+  } = useQuery<ImageWithBreeds[]>(['randomImage'], API.randomImages, {
     suspense: true,
     structuralSharing(current, next) {
       return (current || []).concat(next);
     }
   });
 
-  useEffect(() => {
-    return () => {
-      refetch();
-    };
-  }, [refetch]);
-
-  const handleChangePet = () => {
+  const handleChangeImage = () => {
     if (index && index % UPDATE_RATE === 0) {
       refetch();
     }
 
     const nextIndex = index + 1;
+    preservedIndex = nextIndex;
 
     setIndex(nextIndex);
   };
 
   return {
     index,
-    pets,
+    images,
     isLoading,
     isRefetching,
-    pet: pets?.[index],
-    onChangePet: handleChangePet
+    image: images?.[index],
+    onChangeImage: handleChangeImage
   };
 }

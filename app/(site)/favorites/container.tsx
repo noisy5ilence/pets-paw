@@ -4,7 +4,7 @@ import { cloneElement, Fragment, ReactElement } from 'react';
 import classes from 'classnames';
 
 import useFavorite from '@/app/(site)/voting/useFavorite';
-import usePhotos from '@/app/(site)/voting/usePhotos';
+import useImages from '@/app/(site)/voting/useImages';
 import Grid from '@/components/Grid';
 import NoItem from '@/components/NoItem';
 
@@ -16,18 +16,18 @@ export default function Container() {
   const { data: favorites, isFetched } = useFavorites({ suspense: true });
   const { remove } = useFavorite({ instantRemove: true });
 
-  const photos = usePhotos({ type: 'favorites', list: favorites || [] });
+  const images = useImages({ type: 'favorites', list: favorites || [] });
 
-  if (isFetched && !photos.length) return <NoItem>favorites</NoItem>;
+  if (isFetched && !images.length) return <NoItem>favorites</NoItem>;
 
   return (
-    <Grid photos={photos}>
-      {(images, hoveredClassName) =>
-        images.map((imageNode, index) => {
+    <Grid images={images}>
+      {(nodes, hoveredClassName) =>
+        nodes.map((node, index) => {
           let image: HTMLImageElement;
           return (
-            <Fragment key={photos[index].name}>
-              {cloneElement(imageNode as ReactElement, {
+            <Fragment key={images[index].logId}>
+              {cloneElement(node as ReactElement, {
                 ref: (element: HTMLImageElement) => {
                   image = element;
                   element?.classList.add('remove-transition-init');
@@ -38,11 +38,9 @@ export default function Container() {
                 className={classes(hoveredClassName, 'button vector')}
                 onClick={() => {
                   image?.classList.add('remove-transition-emit');
-                  image?.addEventListener(
-                    'transitionend',
-                    () => remove.mutate({ favoriteId: photos[index].id?.toString() }),
-                    { once: true }
-                  );
+                  image?.addEventListener('transitionend', () => remove.mutate({ favoriteId: images[index].logId }), {
+                    once: true
+                  });
                 }}
                 disabled={remove.isLoading}
                 title='Remove from favorite'

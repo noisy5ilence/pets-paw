@@ -9,21 +9,19 @@ export type QueryFilters = Partial<{
   order: 'asc' | 'desc';
 }>;
 
+export interface Props {
+  breeds: BreedWithImage[];
+  onFilter: Dispatch<SetStateAction<ImageWithName[]>>;
+  isFetched: boolean;
+}
+
 const mapper = (filters: QueryFilters, name: string, value: string) => ({
   ...filters,
   page: name === 'limit' ? '' : filters.page,
   [name]: value
 });
 
-const useFilters = ({
-  breeds,
-  onFilter,
-  isFetched
-}: {
-  isFetched: boolean;
-  breeds: Breed[];
-  onFilter: Dispatch<SetStateAction<Image[]>>;
-}): [QueryFilters, ApplyFilters] => {
+const useFilters = ({ breeds, onFilter, isFetched }: Props): [QueryFilters, ApplyFilters] => {
   const { search, filters, applyFilters } = useQueryFilters<QueryFilters>({ mapper });
 
   useEffect(() => {
@@ -43,7 +41,7 @@ const useFilters = ({
         })
         .filter(({ id }) => (filters.breed !== undefined ? filters.breed == id : true))
         .slice(page * limit, page * limit + limit)
-        .map(({ image, name, id }) => ({ ...image, id, name }));
+        .map(({ image, name, id }) => ({ ...image!, id, name }));
     });
   }, [search, isFetched, onFilter]);
 

@@ -5,23 +5,24 @@ import useQueryStateUpdater from '@/hooks/useQueryStateUpdater';
 import API from './api';
 import { KEY } from './useVotes';
 
-export default function useVote({ pet }: { pet?: RandomPet }) {
+export default function useVote() {
   const setVotes = useQueryStateUpdater<Vote[]>({ key: KEY });
 
   return useMutation(
-    ({ vote }: { vote: 1 | -1 }) => {
+    ({ image, vote }: { vote: 1 | -1; image: ImageWithBreeds }) => {
+      console.log('liked', image.id);
       setVotes((state) => {
         return [
-          { image_id: pet?.id, value: vote, image: { id: pet?.id, url: pet?.url }, created_at: new Date() } as Vote,
+          { image_id: image.id, value: vote, image: { id: image.id, url: image.url }, created_at: new Date() } as Vote,
           ...(state || [])
         ];
       });
-      return API.votes.vote({ vote, petId: pet?.id! });
+      return API.votes.vote({ vote, image_id: image.id });
     },
     {
-      onError() {
+      onError(_, { image }) {
         setVotes((state) => {
-          return state?.filter(({ image_id }) => image_id !== pet?.id) || [];
+          return state?.filter(({ image_id }) => image_id != image.id) || [];
         });
       }
     }

@@ -5,15 +5,15 @@ import API from './api';
 import useFavorites from './useFavorites';
 import useVotes from './useVotes';
 
-export default function useLogs({ petId }: { petId?: string }) {
+export default function useLogs({ image_id }: { image_id?: string | number }) {
   const { data: favorites, isFetched: isFetchedFavorites } = useFavorites();
   const { data: votes, isFetched: isFetchedVotes } = useVotes();
 
   return {
     isFetched: isFetchedFavorites && isFetchedVotes,
     favoriteId: useMemo(() => {
-      return favorites?.find(({ image_id }) => image_id === petId)?.id;
-    }, [favorites, petId]),
+      return favorites?.find((fav) => fav.image_id === image_id)?.id;
+    }, [favorites, image_id]),
     logs: useMemo(() => {
       const logs: Log[] = [];
 
@@ -21,14 +21,9 @@ export default function useLogs({ petId }: { petId?: string }) {
 
       logs.push(...(votes || []));
 
-      return logs
-        .sort((a, b) => {
-          return +new Date(b.created_at) - +new Date(a.created_at);
-        })
-        .map((log) => {
-          log.value = log.value ?? 0;
-          return log;
-        });
+      return logs.sort((a, b) => {
+        return Number(new Date(b.created_at)) - Number(new Date(a.created_at));
+      });
     }, [favorites, votes])
   };
 }

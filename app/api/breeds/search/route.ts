@@ -4,7 +4,7 @@ import server from '@/network/server';
 
 export async function GET(request: Request) {
   const breed = new URL(request.url).searchParams.get('breed');
-  const data: Breed[] = await server.get('/breeds/search', {
+  const data: BreedWithImage[] = await server.get('/breeds/search', {
     params: {
       q: breed
     }

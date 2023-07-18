@@ -16,7 +16,7 @@ import { QueryFilters } from './useFilters';
 
 export default function Container({ initialData }: { initialData: Breed[] }) {
   const mounted = useMounted();
-  const [photos, setPhotos] = useState<Image[]>([]);
+  const [images, setImages] = useState<ImageWithName[]>([]);
   const { data: breeds, isFetched } = useBreeds({ suspense: true });
   const { filters, applyFilters } = useQueryFilters<QueryFilters>();
   const gridRef = useRef<HTMLDivElement>(null);
@@ -24,7 +24,7 @@ export default function Container({ initialData }: { initialData: Breed[] }) {
   const filtersNode =
     mounted &&
     createPortal(
-      <Filters breeds={breeds || []} onFilter={setPhotos} isFetched={isFetched} />,
+      <Filters breeds={breeds || []} onFilter={setImages} isFetched={isFetched} />,
       document.getElementById(breadcrumbsPortalId)!
     );
 
@@ -42,14 +42,14 @@ export default function Container({ initialData }: { initialData: Breed[] }) {
   }
 
   const isShowPaginator =
-    Boolean(photos.length) &&
-    photos.length !== breeds?.length &&
-    photos.length >= (parseInt(filters.limit || '0') || breeds?.length || 0);
+    Boolean(images.length) &&
+    images.length !== breeds?.length &&
+    images.length >= (parseInt(filters.limit || '0') || breeds?.length || 0);
 
   return (
     <>
       {filtersNode}
-      <BreedsGrid photos={photos} ref={gridRef}>
+      <BreedsGrid images={images} ref={gridRef}>
         {isShowPaginator && (
           <Paginator
             name='page'

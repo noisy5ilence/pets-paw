@@ -4,7 +4,6 @@ import { Fragment, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import classes from 'classnames';
 
-import useGallery from '@/app/(site)/gallery/useGallery';
 import useFavorite from '@/app/(site)/voting/useFavorite';
 import useFavorites from '@/app/(site)/voting/useFavorites';
 import Grid from '@/components/Grid';
@@ -17,6 +16,7 @@ import Filters, { QueryFilters } from './components/Filters';
 import UnFavIcon from './icons/filled-heart.svg';
 import FavIcon from './icons/like.svg';
 import UploadIcon from './icons/upload.svg';
+import useGallery from './useGallery';
 
 import styles from './styles.module.css';
 
@@ -29,18 +29,18 @@ export default function Container() {
 
   const favoritesIdsMap = useMemo(() => {
     return (
-      favorites?.reduce((map, fav) => {
-        map[fav?.image?.url] = fav?.id?.toString();
+      favorites?.reduce((map, favorite) => {
+        map[favorite.image.url] = favorite.id;
         return map;
-      }, {} as Record<string, string>) || {}
+      }, {} as Record<string, number>) || {}
     );
   }, [favorites]);
 
-  const { data, isRefetching, refetch } = useGallery({ params: filters });
+  const { data: response, isRefetching, refetch } = useGallery({ params: filters });
 
-  const photos = useMemo(() => {
-    return data?.data?.map(({ breeds, ...image }) => image) || [];
-  }, [data]);
+  const images = useMemo(() => {
+    return response?.data?.map(({ breeds, ...image }) => image) || [];
+  }, [response]);
 
   useEffect(() => {
     if (isRefetching) return;
@@ -65,30 +65,34 @@ export default function Container() {
       </div>
       <Grid
         ref={gridRef}
-        photos={photos}
+        images={images}
         footer={
           <Paginator
             disabled={isRefetching}
             name='page'
             page={parseInt(filters.page || '0')}
             onChange={applyFilters}
-            total={data?.paginator?.total || 1}
+            total={response?.paginator?.total || 1}
             perPage={parseInt(filters.limit || '5')}
           />
         }
       >
-        {(images, hoveredClassName) =>
-          images.map((imageNode, index) => {
-            const favoriteId = favoritesIdsMap[photos?.[index]?.url];
+        {(nodes, hoveredClassName) =>
+          nodes.map((node, index) => {
+            const url = images?.[index]?.url;
+            const favoriteId = favoritesIdsMap[url];
             return (
-              <Fragment key={photos?.[index].id}>
-                {imageNode}
+              <Fragment key={images?.[index].url}>
+                {node}
                 <button
                   tabIndex={-1}
                   className={classes(hoveredClassName, 'button vector')}
-                  title={favoriteId ? 'Remove from favorite' : 'Add to favorite'}
-                  onClick={() => (favoriteId ? remove.mutate({ favoriteId }) : add.mutate({ pet: photos[index] }))}
-                  disabled={add.isLoading}
+                  title={favoriteId ? 'Remove from favorites' : 'Add to favorites'}
+                  onClick={() => (favoriteId ? remove.mutate({ favoriteId }) : add.mutate({ image: images[index] }))}
+                  disabled={
+                    (add.variables?.image?.url == url && add.isLoading) ||
+                    (remove.variables?.favoriteId == favoriteId && remove.isLoading)
+                  }
                 >
                   {favoriteId ? <UnFavIcon /> : <FavIcon />}
                 </button>

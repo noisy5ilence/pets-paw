@@ -12,8 +12,8 @@ import styles from './styles.module.css';
 export default function Container() {
   const { query, data: breeds, isFetched } = useBreeds();
 
-  const photos = useMemo(() => {
-    return breeds?.map(({ image, name, id }) => ({ ...image, id, name })) || [];
+  const images = useMemo(() => {
+    return breeds?.map(({ image, name, id }) => ({ ...image!, id, name })) || [];
   }, [breeds]);
 
   return (
@@ -25,7 +25,7 @@ export default function Container() {
       {isFetched && !breeds?.length ? (
         <NoItem replace>No breeds have been found</NoItem>
       ) : (
-        <BreedsGrid photos={photos} />
+        <BreedsGrid images={images} />
       )}
     </>
   );

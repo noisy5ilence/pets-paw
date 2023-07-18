@@ -11,22 +11,22 @@ import styles from './styles.module.css';
 
 interface Props {
   children?: ReactNode;
-  photos: Image[];
+  images?: Omit<ImageWithName, 'width' | 'height'>[];
 }
 
-const BreedsGrid = forwardRef<HTMLDivElement, Props>(({ photos, children }, ref) => {
+const BreedsGrid = forwardRef<HTMLDivElement, Props>(({ images, children }, ref) => {
   return (
-    <Grid photos={photos} footer={children} ref={ref}>
-      {(images, hoveredClassName) =>
-        images.map((imageNode, index) => (
-          <Fragment key={photos?.[index].id}>
-            {imageNode}
+    <Grid images={images} footer={children} ref={ref}>
+      {(nodes, hoveredClassName) =>
+        nodes.map((node, index) => (
+          <Fragment key={images?.[index].id}>
+            {node}
             <Link
-              href={`${routes.breeds.path}/${photos?.[index].id}`}
+              href={`${routes.breeds.path}/${images?.[index].id}`}
               tabIndex={-1}
               className={classes(hoveredClassName, styles.link, 'button vector')}
             >
-              {photos?.[index].name}
+              {images?.[index].name}
             </Link>
           </Fragment>
         ))

@@ -1,7 +1,7 @@
 import client from '@/network';
 
 const API = {
-  search({ query }: { query: string }): Promise<Breed[]> {
+  search({ query }: { query: string }): Promise<BreedWithImage[]> {
     return client.get('/breeds/search', {
       params: {
         breed: query
