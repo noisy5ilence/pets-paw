@@ -30,7 +30,7 @@ export default function useFavorite({ instantRemove }: { instantRemove?: boolean
   );
 
   const handleRemove = (favoriteId: number) => {
-    setFavorites((state) => {
+    setFavorites((state: Favorite[]) => {
       return state?.filter(({ id }) => id != favoriteId) || [];
     });
   };

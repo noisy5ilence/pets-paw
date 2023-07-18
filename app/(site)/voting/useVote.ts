@@ -20,7 +20,7 @@ export default function useVote() {
     },
     {
       onError(_, { image }) {
-        setVotes((state) => {
+        setVotes((state: Vote[]) => {
           return state?.filter(({ image_id }) => image_id != image.id) || [];
         });
       }

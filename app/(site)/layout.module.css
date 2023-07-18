@@ -33,6 +33,23 @@
   justify-content: center;
 }
 
+.error {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.error h2 {
+  color: var(--color-primary);
+}
+
+.error button {
+  margin: 0 auto;
+}
+
 @media screen and (max-width: 1230px) {
   .container {
     max-width: 100%;
@@ -65,12 +82,12 @@
     height: var(--outside-gap);
     position: absolute;
     width: 100%;
-    z-index: 10;
     background-color: var(--color-background);
     top: calc(var(--outside-gap) * -1);
   }
   .toolbar:after {
     height: calc(var(--outside-gap) / 2);
     top: 100%;
+    z-index: -1;
   }
 }

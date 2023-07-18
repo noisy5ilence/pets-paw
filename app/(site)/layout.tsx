@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import classes from 'classnames';
 
-import Loading from '@/app/(site)/loading';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Toolbar from '@/components/Toolbar';
 import breadcrumbsPortalId from '@/constants/breadcrumbsPortalId';
@@ -22,7 +21,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <div className={styles.breadcrumbs} id={breadcrumbsPortalId}>
               <Breadcrumbs />
             </div>
-            {/*<Loading />*/}
             {children}
           </div>
         </div>

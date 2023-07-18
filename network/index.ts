@@ -1,7 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 
 const client = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_PETS_PAW_BASE}/api`,
+  baseURL: `${process.env.NODE_ENV === 'development' ? 'http://' : 'https://'}${
+    process.env.NEXT_PUBLIC_PETS_PAW_BASE
+  }/api`,
   withCredentials: true
 });
 

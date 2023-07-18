@@ -70,3 +70,10 @@ body[data-theme="dark"] {
   transition: background linear var(--duration-default),
     color linear var(--duration-default);
 }
+
+@media screen and (max-height: 900px) {
+  body[data-theme="light"],
+  body[data-theme="dark"] {
+    transition: none;
+  }
+}
