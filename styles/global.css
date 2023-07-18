@@ -20,7 +20,7 @@ html {
   justify-content: center;
   align-items: center;
   height: 100%;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 
 body {
@@ -57,12 +57,13 @@ main {
   display: none;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1230px) {
   main {
     max-width: 680px;
     width: 100%;
     margin: 0 auto;
   }
+
   body {
     max-height: 100%;
   }
@@ -80,4 +81,23 @@ a:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--color-2);
   border-radius: 10px;
+}
+
+@media screen and (max-height: 900px) {
+  html,
+  body,
+  main {
+    min-height: 100%;
+    height: auto;
+    max-height: initial;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  body {
+    flex-direction: row;
+  }
+  html {
+    flex-direction: row;
+    align-items: initial;
+  }
 }

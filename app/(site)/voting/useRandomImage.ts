@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import API from './api';
@@ -18,7 +18,16 @@ export default function useRandomImage() {
   } = useQuery<ImageWithBreeds[]>(['randomImage'], API.randomImages, {
     suspense: true,
     structuralSharing(current, next) {
-      return (current || []).concat(next);
+      const uniqueIds: Record<string, string> = {};
+
+      return (current || []).concat(next).reduce((unique, image) => {
+        if (uniqueIds[image.id]) return unique;
+
+        uniqueIds[image.id] = image.id;
+        unique.push(image);
+
+        return unique;
+      }, [] as ImageWithBreeds[]);
     }
   });
 

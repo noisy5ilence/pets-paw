@@ -1,0 +1,113 @@
+.root {
+  text-align: center;
+}
+
+.root .close {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.close svg {
+  transform: scale(.939);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  margin-top: 40px;
+}
+
+.description {
+  margin-bottom: 40px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: calc(20px * 1.5);
+  color: var(--color-placeholder);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.description a {
+  display: inline;
+  color: var(--color-2);
+}
+
+.filename {
+  margin-top: 20px;
+  color: var(--color-placeholder);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: calc(20px * 1.5);
+}
+
+.root .upload {
+  margin: 20px auto 0;
+  background: var(--color-2);
+  color: var(--color-1);
+}
+
+.upload.uploading {
+  pointer-events: none;
+}
+
+.loader {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  transform: rotate(360deg);
+  animation: rotating 1s linear infinite;
+  background: url("./icons/loader.png") no-repeat;
+}
+
+.status {
+  margin-top: 20px;
+}
+
+@media (hover: hover) {
+  .root .upload:hover {
+    margin: 20px auto 0;
+    background: var(--color-4);
+    color: var(--color-2);
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .root {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .filename,
+  .description {
+    font-size: 16px;
+    line-height: calc(16px * 1.5);
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

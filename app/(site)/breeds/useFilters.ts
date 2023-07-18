@@ -43,7 +43,7 @@ const useFilters = ({ breeds, onFilter, isFetched }: Props): [QueryFilters, Appl
         .slice(page * limit, page * limit + limit)
         .map(({ image, name, id }) => ({ ...image!, id, name }));
     });
-  }, [search, isFetched, onFilter]);
+  }, [isFetched, onFilter, breeds, filters.breed, filters.limit, filters.order, filters.page]);
 
   return [filters, applyFilters];
 };

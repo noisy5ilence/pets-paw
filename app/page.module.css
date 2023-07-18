@@ -31,8 +31,14 @@
   background-position-y: center;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1230px) {
   .root {
     display: none;
+  }
+}
+
+@media screen and (max-height: 900px) {
+  .root {
+    margin-left: auto;
   }
 }

@@ -10,7 +10,6 @@ export default function useVote() {
 
   return useMutation(
     ({ image, vote }: { vote: 1 | -1; image: ImageWithBreeds }) => {
-      console.log('liked', image.id);
       setVotes((state) => {
         return [
           { image_id: image.id, value: vote, image: { id: image.id, url: image.url }, created_at: new Date() } as Vote,

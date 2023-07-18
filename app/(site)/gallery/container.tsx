@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useEffect, useMemo, useRef } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import classes from 'classnames';
 
@@ -8,6 +8,7 @@ import useFavorite from '@/app/(site)/voting/useFavorite';
 import useFavorites from '@/app/(site)/voting/useFavorites';
 import Grid from '@/components/Grid';
 import Paginator from '@/components/Paginator';
+import Upload from '@/components/Upload';
 import breadcrumbsPortalId from '@/constants/breadcrumbsPortalId';
 import useMounted from '@/hooks/useMounted';
 import useQueryFilters from '@/hooks/useQueryFilters';
@@ -26,6 +27,7 @@ export default function Container() {
   const { filters, applyFilters } = useQueryFilters<QueryFilters>();
   const { add, remove } = useFavorite();
   const { data: favorites } = useFavorites();
+  const [isShowUpload, setIsShowUpload] = useState(false);
 
   const favoritesIdsMap = useMemo(() => {
     return (
@@ -50,9 +52,10 @@ export default function Container() {
 
   return (
     <>
+      {isShowUpload && <Upload onClose={() => setIsShowUpload(false)} />}
       {mounted &&
         createPortal(
-          <button className={classes(styles.upload, 'button')}>
+          <button className={classes(styles.upload, 'button', 'upload')} onClick={() => setIsShowUpload(true)}>
             <span className={styles.icon}>
               <UploadIcon />
             </span>

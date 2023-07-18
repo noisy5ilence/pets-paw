@@ -55,3 +55,23 @@ button.button.active path {
 .button.button:active {
   transform: scale(0.96);
 }
+
+.button.upload {
+  display: flex;
+  align-items: center;
+  padding: 12px 30px;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: var(--color-alt-icon-background);
+  color: var(--color-18);
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.button.upload:active {
+  color: var(--color-1);
+  background: var(--color-18);
+}

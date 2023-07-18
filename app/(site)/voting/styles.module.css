@@ -33,3 +33,9 @@
   top: 0;
   left: 0;
 }
+
+@media screen and (max-height: 900px) {
+  .list {
+    position: static;
+  }
+}

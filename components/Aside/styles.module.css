@@ -35,11 +35,18 @@
   margin-top: 20px;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1230px) {
   .root {
     width: 100%;
   }
   .root.isHide {
     display: none;
+  }
+}
+
+@media screen and (max-height: 900px) {
+  .root {
+    position: fixed;
+    padding-right: calc(var(--outside-gap) * 2);
   }
 }

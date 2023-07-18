@@ -111,3 +111,12 @@
     align-items: flex-start;
   }
 }
+
+@media screen and (max-height: 900px) {
+  .details {
+    overflow: initial;
+  }
+  .content {
+    position: static;
+  }
+}

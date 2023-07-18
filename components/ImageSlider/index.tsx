@@ -1,5 +1,6 @@
 import { FC, UIEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import classes from 'classnames';
+import NextImage from 'next/image';
 
 import useDraggingScroll from '@/hooks/useDraggingScroll';
 
@@ -19,10 +20,9 @@ const ImageSlider: FC<Props> = ({ images, index }) => {
 
   const changeSlideTimeout = useRef<NodeJS.Timeout>();
 
-  const handleChangeSlide = useCallback(
-    (index: number) => slidesRefs.current[index]?.scrollIntoView({ behavior: 'smooth' }),
-    []
-  );
+  const handleChangeSlide = useCallback((index: number) => {
+    slidesRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }, []);
 
   const handleLoadImage = (image: HTMLImageElement) => {
     const container = image?.parentElement;
@@ -63,8 +63,9 @@ const ImageSlider: FC<Props> = ({ images, index }) => {
                 className={classes(styles.item, styles.loading)}
                 ref={(element) => (slidesRefs.current[index] = element!)}
               >
-                <img
+                <NextImage
                   src={image.url}
+                  layout='fill'
                   ref={(image) => image?.complete && handleLoadImage(image)}
                   onLoad={(event) => handleLoadImage(event.target as HTMLImageElement)}
                   alt='Pet'
