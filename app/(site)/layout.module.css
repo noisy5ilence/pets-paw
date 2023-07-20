@@ -33,23 +33,6 @@
   justify-content: center;
 }
 
-.error {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.error h2 {
-  color: var(--color-primary);
-}
-
-.error button {
-  margin: 0 auto;
-}
-
 @media screen and (max-width: 1230px) {
   .container {
     max-width: 100%;

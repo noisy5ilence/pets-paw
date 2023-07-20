@@ -35,7 +35,7 @@ body {
 }
 
 main {
-  width: 56.1595%;
+  width: var(--right-width);
   height: 100%;
   flex-shrink: 0;
   display: flex;
@@ -80,6 +80,31 @@ a:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--color-2);
   border-radius: 10px;
+}
+
+.error-boundary {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.error-boundary h2 {
+  color: var(--color-primary);
+}
+
+.error-boundary button {
+  margin: 0 auto;
+}
+
+.error-boundary button:disabled {
+  cursor: progress;
+}
+
+body > .error-boundary {
+  width: var(--right-width);
 }
 
 @media screen and (max-height: 900px) {

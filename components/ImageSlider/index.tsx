@@ -63,9 +63,8 @@ const ImageSlider: FC<Props> = ({ images, index }) => {
                 className={classes(styles.item, styles.loading)}
                 ref={(element) => (slidesRefs.current[index] = element!)}
               >
-                <NextImage
+                <img
                   src={image.url}
-                  layout='fill'
                   ref={(image) => image?.complete && handleLoadImage(image)}
                   onLoad={(event) => handleLoadImage(event.target as HTMLImageElement)}
                   alt='Pet'

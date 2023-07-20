@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 const items: [keyof typeof routes, string, StaticImageData][] = [
   ['voting', 'var(--color-8)', voting],
   ['breeds', 'var(--color-7)', breeds],
-  ['gallery', 'var(--color-9)', gallery],
+  ['gallery', 'var(--color-9)', gallery]
 ];
 
 interface Props {
@@ -39,17 +39,9 @@ const Navigation: FC<Props> = ({ onRedirect }) => {
             <li key={key} className={styles.item}>
               <Link href={route.path} className={styles.link} onClick={onRedirect}>
                 <div className={styles.card}>
-                  <Card
-                    color={color}
-                    name={key}
-                    isActive={isActive}
-                    background={background}
-                  />
+                  <Card color={color} name={key} isActive={isActive} background={background} />
                 </div>
-                <button
-                  tabIndex={-1}
-                  className={cn('button', { active: isActive })}
-                >
+                <button tabIndex={-1} className={cn('button', { active: isActive })}>
                   {route.title}
                 </button>
               </Link>

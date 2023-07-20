@@ -55,7 +55,7 @@ export default function Container() {
       {isShowUpload && <Upload onClose={() => setIsShowUpload(false)} />}
       {mounted &&
         createPortal(
-          <button className={classes(styles.upload, 'button', 'alt')} onClick={() => setIsShowUpload(true)}>
+          <button className={classes(styles.upload, 'button alt')} onClick={() => setIsShowUpload(true)}>
             <span className={styles.icon}>
               <UploadIcon />
             </span>

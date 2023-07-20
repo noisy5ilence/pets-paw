@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import API from './api';
@@ -13,6 +13,7 @@ export default function useRandomImage() {
   const {
     data: images,
     refetch,
+    remove,
     isLoading,
     isRefetching
   } = useQuery<ImageWithBreeds[]>(['randomImage'], API.randomImages, {
@@ -30,6 +31,13 @@ export default function useRandomImage() {
       }, [] as ImageWithBreeds[]);
     }
   });
+
+  useEffect(() => {
+    return () => {
+      preservedIndex = 0;
+      remove();
+    };
+  }, [remove]);
 
   const handleChangeImage = () => {
     if (index && index % UPDATE_RATE === 0) {

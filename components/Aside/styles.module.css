@@ -1,5 +1,5 @@
 .root {
-  width: 43.8405%;
+  width: var(--left-width);
   display: flex;
   justify-content: center;
 }
