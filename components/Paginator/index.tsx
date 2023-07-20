@@ -21,7 +21,7 @@ const Paginator: FC<Props> = ({ total, page, perPage = total, name, onChange, di
   return (
     <div className={styles.root}>
       <button
-        className={classes('button', styles.button)}
+        className={classes('button', 'alt', styles.button)}
         disabled={page == 0 || disabled}
         onClick={() => {
           const nextPage = page - 1;
@@ -34,7 +34,7 @@ const Paginator: FC<Props> = ({ total, page, perPage = total, name, onChange, di
         PREV
       </button>
       <button
-        className={classes('button', styles.button)}
+        className={classes('button', 'alt', styles.button)}
         disabled={page == totalPages || disabled}
         onClick={() => {
           const nextPage = +page + 1;

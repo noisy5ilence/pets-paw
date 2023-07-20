@@ -14,7 +14,7 @@
   justify-content: center;
 }
 
-.button {
+.root .button {
   height: 40px;
   display: flex;
   justify-content: center;
@@ -23,9 +23,8 @@
   font-weight: 500;
   line-height: 16px;
   letter-spacing: 2px;
-  color: var(--color-18);
-  background: var(--color-17);
   gap: 10px;
+  margin: 0;
 }
 
 .button path {

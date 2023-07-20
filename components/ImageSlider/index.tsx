@@ -39,7 +39,7 @@ const ImageSlider: FC<Props> = ({ images, index }) => {
 
     clearTimeout(changeSlideTimeout.current!);
 
-    changeSlideTimeout.current = setTimeout(() => setIndex(index), 30);
+    changeSlideTimeout.current = setTimeout(() => setIndex(index), 10);
   };
 
   useEffect(() => {

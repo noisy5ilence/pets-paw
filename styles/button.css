@@ -56,7 +56,7 @@ button.button.active path {
   transform: scale(0.96);
 }
 
-.button.upload {
+.button.alt {
   display: flex;
   align-items: center;
   padding: 12px 30px;
@@ -71,7 +71,7 @@ button.button.active path {
   margin-left: auto;
 }
 
-.button.upload:active {
+.button.alt:active {
   color: var(--color-1);
   background: var(--color-18);
 }

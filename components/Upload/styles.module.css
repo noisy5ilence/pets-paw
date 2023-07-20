@@ -54,13 +54,13 @@
   line-height: calc(20px * 1.5);
 }
 
-.root .upload {
+.root .alt {
   margin: 20px auto 0;
   background: var(--color-2);
   color: var(--color-1);
 }
 
-.upload.uploading {
+.alt.uploading {
   pointer-events: none;
 }
 
@@ -78,7 +78,7 @@
 }
 
 @media (hover: hover) {
-  .root .upload:hover {
+  .root .alt:hover {
     margin: 20px auto 0;
     background: var(--color-4);
     color: var(--color-2);

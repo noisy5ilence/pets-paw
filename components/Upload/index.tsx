@@ -45,7 +45,7 @@ const Upload: FC<Props> = ({ onClose }) => {
       <p className={styles.filename}>{file ? `Image File Name: ${file?.name}` : 'No file selected'}</p>
       {file && (
         <button
-          className={classes(styles.upload, 'button', 'upload', { [styles.uploading]: upload.isLoading })}
+          className={classes(styles.upload, 'button', 'alt', { [styles.uploading]: upload.isLoading })}
           onClick={() => upload.mutate()}
         >
           {upload.isLoading ? (

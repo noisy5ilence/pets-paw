@@ -1,19 +1,20 @@
-'use client'; // Error components must be Client Components
+'use client';
 
-import { useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 import styles from './layout.module.css';
 
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+  const queryClient = useQueryClient();
+
+  const handleReset = () => {
+    queryClient.refetchQueries().then(() => reset());
+  };
 
   return (
     <div className={styles.error}>
       <h2>Something went wrong</h2>
-      <button className='button upload' onClick={() => reset()}>
+      <button className='button alt' onClick={handleReset}>
         Try again
       </button>
     </div>
