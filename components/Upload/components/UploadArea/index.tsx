@@ -71,7 +71,7 @@ const UploadArea: FC<Props> = ({ onPreviewUpload, file, onClick, hasError }) => 
           isLoading ? (
             <Loader />
           ) : (
-            <Image src={preview} alt={file!.name} layout='fill' />
+            <Image src={preview} unoptimized alt={file!.name} layout='fill' />
           )
         ) : (
           <div className={styles.stub}>

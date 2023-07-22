@@ -23,7 +23,14 @@ const Grid = forwardRef<HTMLDivElement, Props>(({ images, className, children, f
     return !image?.url ? (
       <ImageStub key={uniqueId()} />
     ) : (
-      <NextImage key={image.id} onLoadingComplete={handleLoadImage} src={image.url} layout='fill' alt={'Pet'} />
+      <NextImage
+        unoptimized
+        key={image.id}
+        onLoadingComplete={handleLoadImage}
+        src={image.url}
+        layout='fill'
+        alt={'Pet'}
+      />
     );
   });
 
