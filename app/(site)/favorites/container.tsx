@@ -14,7 +14,7 @@ import FilledHeart from './icons/filled-heart.svg';
 
 export default function Container() {
   const { data: favorites, isFetched } = useFavorites({ suspense: true });
-  const { remove } = useFavorite({ instantRemove: true });
+  const { remove } = useFavorite();
 
   const images = useImages({ type: 'favorites', list: favorites || [] });
 

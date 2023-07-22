@@ -12,7 +12,8 @@ const Providers = ({ children }: { children: ReactNode }) => {
           queries: {
             refetchOnWindowFocus: false,
             keepPreviousData: true,
-            staleTime: Number.POSITIVE_INFINITY
+            staleTime: Number.POSITIVE_INFINITY,
+            cacheTime: Number.POSITIVE_INFINITY
           }
         }
       })

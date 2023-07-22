@@ -1,20 +1,18 @@
-import { useMutation } from '@tanstack/react-query';
-
-import useQueryStateUpdater from '@/hooks/useQueryStateUpdater';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import API from './api';
 import { KEY } from './useFavorites';
 
-export default function useFavorite({ instantRemove }: { instantRemove?: boolean } = {}) {
-  const setFavorites = useQueryStateUpdater<Favorite[]>({ key: KEY });
+export default function useFavorite() {
+  const queryClient = useQueryClient();
 
   const add = useMutation(
-    ({ image }: { image: Omit<ImageWithBreeds, 'breeds'> }) => {
-      return API.favorites.add({ image_id: image.id });
-    },
+    ({ image }: { image: Omit<ImageWithBreeds, 'breeds'> }) => API.favorites.add({ image_id: image.id }),
     {
-      onSuccess({ id }, { image }) {
-        setFavorites((state) => {
+      onSuccess: async ({ id }, { image }) => {
+        if (!queryClient.getQueryState([KEY])) await queryClient.fetchQuery([KEY]);
+
+        queryClient.setQueryData<Favorite[]>([KEY], (state) => {
           return [
             {
               id,
@@ -29,24 +27,22 @@ export default function useFavorite({ instantRemove }: { instantRemove?: boolean
     }
   );
 
-  const handleRemove = (favoriteId: number) => {
-    setFavorites((state: Favorite[]) => {
-      return state?.filter(({ id }) => id != favoriteId) || [];
-    });
-  };
+  const remove = useMutation(API.favorites.delete, {
+    onMutate: async ({ favoriteId }) => {
+      await queryClient.cancelQueries({ queryKey: [KEY] });
 
-  const remove = useMutation(
-    ({ favoriteId }: { favoriteId: number }) => {
-      instantRemove && handleRemove(favoriteId);
-      return API.favorites.delete({ favoriteId });
+      const snapshot = queryClient.getQueryData<Favorite[]>([KEY]);
+
+      queryClient.setQueryData<Favorite[]>([KEY], (state) => {
+        return state?.filter((f) => f.id != favoriteId) || [];
+      });
+
+      return snapshot;
     },
-    {
-      onSuccess(_, { favoriteId }) {
-        if (instantRemove) return;
-        handleRemove(favoriteId);
-      }
+    onError(error, variables, snapshot) {
+      queryClient.setQueryData<Favorite[]>([KEY], snapshot);
     }
-  );
+  });
 
   return {
     remove,

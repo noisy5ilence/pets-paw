@@ -1,6 +1,5 @@
 import { FC, UIEventHandler, useCallback, useEffect, useRef, useState } from 'react';
 import classes from 'classnames';
-import NextImage from 'next/image';
 
 import useDraggingScroll from '@/hooks/useDraggingScroll';
 

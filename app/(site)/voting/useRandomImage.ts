@@ -6,17 +6,18 @@ import API from './api';
 const UPDATE_RATE = 5;
 
 let preservedIndex = 0;
+const KEY = 'randomImage';
 
 export default function useRandomImage() {
   const [index, setIndex] = useState(preservedIndex);
 
   const {
     data: images,
+    isLoading,
     refetch,
     remove,
-    isLoading,
     isRefetching
-  } = useQuery<ImageWithBreeds[]>(['randomImage'], API.randomImages, {
+  } = useQuery<ImageWithBreeds[]>([KEY], API.randomImages, {
     suspense: true,
     structuralSharing(current, next) {
       const uniqueIds: Record<string, string> = {};
@@ -34,13 +35,14 @@ export default function useRandomImage() {
 
   useEffect(() => {
     return () => {
-      preservedIndex = 0;
       remove();
+      refetch();
+      preservedIndex = 0;
     };
-  }, [remove]);
+  }, [refetch, remove]);
 
   const handleChangeImage = () => {
-    if (index && index % UPDATE_RATE === 0) {
+    if ((index && index % UPDATE_RATE === 0) || images!.length < UPDATE_RATE) {
       refetch();
     }
 
