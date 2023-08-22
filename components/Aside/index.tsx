@@ -12,13 +12,11 @@ const Aside: FC<{ header: ReactNode }> = ({ header }) => {
   const pathname = usePathname();
 
   return (
-    <aside
-      className={classes(styles.root, 'appear-left', { [styles.isHide]: pathname !== '/' })}
-    >
+    <aside className={classes(styles.root, 'appear-left', { [styles.isHide]: pathname !== '/' })}>
       <div className={styles.aside}>
         <div className={styles.header}>{header}</div>
-        <h1 className={styles.title}>Hi, cat lover!</h1>
-        <h2 className={styles.subtitle}>Welcome to cat&#39;s heaven ^_^</h2>
+        <h1 className={styles.title}>Hi!👋</h1>
+        <h2 className={styles.subtitle}>Welcome to MacPaw Bootcamp 2023</h2>
         <h3 className={styles.description}>Lets start using The Cat API</h3>
         <div className={styles.navigation}>
           <Navigation />

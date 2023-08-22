@@ -4,4 +4,4 @@ You can run it [`locally`](http://localhost:3000) (you have to set environment v
 
 ![PetsPaw preview](https://github.com/noisy5ilence/pets-paw/blob/main/public/preview.png)
 
-And, of course, you can compare it with its [`original design`](https://www.figma.com/file/lLs7YfysjRvYvEcGfYZOFF/PetsPaw.-Front-end-test-project.?type=design&node-id=0%3A1&mode=dev)
+And, of course, you can compare it with its [`original design`](https://www.figma.com/file/duNvGsm3OMRFORRem8WNFp/Bootcamp-2023?fuid=679284855984481435)
