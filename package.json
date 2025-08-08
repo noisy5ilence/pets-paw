@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "@tanstack/react-query": "^4.29.25",
     "@tanstack/react-query-next-experimental": "^5.0.0-alpha.80",
